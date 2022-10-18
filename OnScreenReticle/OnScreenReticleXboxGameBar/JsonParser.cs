@@ -79,7 +79,7 @@ namespace OnScreenReticleXboxGameBar
             CrossThickness = 5;
             CrossLength = 30;
             CrossOffset = 15;
-            CrossAngle = 0;
+            CrossRotation = 0;
             CrossColorA = 255;
             CrossColorR = 255;
             CrossColorG = 0;
