@@ -5,7 +5,7 @@
     xmlns:local="using:OnScreenReticleXboxGameBar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Width="350" Height="600">
+    mc:Ignorable="d" Width="350" Height="600" UseLayoutRounding="True">
     <Grid>
         <Grid Name="Reticle_grid" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="{Binding MarginString}">
             <Ellipse Width="{Binding DotDiameter}" Height="{Binding DotDiameter}" Fill="{Binding DotColorString}" Visibility="{Binding DotVisibilityString}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
