@@ -1,0 +1,58 @@
+﻿<Window x:Class="OnScreenReticle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnScreenReticle"
+        mc:Ignorable="d"
+        Title="Reticle" Height="100" Width="100"
+        WindowStyle="None" ResizeMode="NoResize"
+        Background="{x:Null}" Topmost="True" Foreground="{x:Null}"
+        AllowsTransparency="True" Loaded="Window_Loaded"
+        Top="{Binding WindowTop, Mode=TwoWay}" Left="{Binding Path=WindowLeft, Mode=TwoWay}">
+    <Grid ContextMenuService.Placement="Right">
+        <Ellipse MouseDown="Ellipse_MouseDown" Width="{Binding ReticleSize}" Height="{Binding ReticleSize}" Grid.RowSpan="2" Fill="{Binding ColorBrush}"/>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Profile - ScreenCenter" Name="Center_menuItem" Click="Center_menuItem_Click" StaysOpenOnClick="True"/>
+                <MenuItem Header="Profile - Hunt:Showdown" Name="Hunt_menuItem" Click="Hunt_menuItem_Click" StaysOpenOnClick="True"/>
+                <MenuItem Header="Color" StaysOpenOnClick="True">
+                    <StackPanel Orientation="Vertical" Width="200" Margin="0,0,-45,0">
+                        <StackPanel>
+                            <Label Content="Alpha"/>
+                            <Slider Name="alphaSlider" Minimum="0" Maximum="255" Value="{Binding ColorA}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="Red"/>
+                            <Slider Name="redSlider" Minimum="0" Maximum="255" Value="{Binding ColorR}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="Green"/>
+                            <Slider Name="greenSlider" Minimum="0" Maximum="255" Value="{Binding ColorG}"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,0,0,5">
+                            <Label Content="Blue"/>
+                            <Slider Name="blueSlider" Minimum="0" Maximum="255" Value="{Binding ColorB}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </MenuItem>
+                <MenuItem Header="Micro Adjust" StaysOpenOnClick="True">
+                    <Grid Width="100" Height="100" Margin="0,0,-45,0" >
+                        <Button Content="▲" Name="UpAdjust" VerticalAlignment="Top" Width="33" Height="33" Click="UpAdjust_Click"/>
+                        <Button Content="▶" Name="RightAdjust" HorizontalAlignment="Right" Width="33" Height="33" Click="RightAdjust_Click"/>
+                        <Button Content="▼" Name="DownAdjust" VerticalAlignment="Bottom" Width="33" Height="33" Click="DownAdjust_Click"/>
+                        <Button Content="◀" Name="LeftAdjust" HorizontalAlignment="Left" Width="33" Height="33" Click="LeftAdjust_Click"/>
+                    </Grid>
+                </MenuItem>
+                <MenuItem Header="Reticle Size" StaysOpenOnClick="True">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,-45,0">
+                        <Slider Width="260" Margin="0" Value="{Binding ReticleSize}" Minimum="4" LargeChange="0.1" Maximum="13"/>
+                        <TextBox Text="{Binding ReticleSize}" Width="55"/>
+                    </StackPanel>
+                </MenuItem>
+                <MenuItem Header="Exit" Name="Exit_menuItem" Click="Exit_menuItem_Click"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
+    </Grid>
+
+</Window>
