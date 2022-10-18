@@ -15,6 +15,7 @@ namespace OnScreenReticleXboxGameBar
 
         public JsonParser()
         {
+            serializer = new JsonSerializer();
             DeserializeSettings();
         }
 
@@ -60,11 +61,11 @@ namespace OnScreenReticleXboxGameBar
             Top = 250;
             Left = 125;
 
-            DotDiameter = 5;
+            DotDiameter = 6;
             DotColorA = 255;
-            DotColorR = 255;
-            DotColorG = 0;
-            DotColorB = 0;
+            DotColorR = 250;
+            DotColorG = 10;
+            DotColorB = 10;
             DotVisibility = true;
 
             AngleThickness = 5;
@@ -87,8 +88,8 @@ namespace OnScreenReticleXboxGameBar
             CrossVisibility = true; 
         }
 
-        public int Top { get; set; }
-        public int Left { get; set; }
+        public double Top { get; set; }
+        public double Left { get; set; }
 
         // Dot
         public double DotDiameter { get; set; }
