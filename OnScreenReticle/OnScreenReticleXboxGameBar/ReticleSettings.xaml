@@ -9,6 +9,14 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Button Content="Set Default" Margin="90,45,0,0" VerticalAlignment="Top"/>
+        <ComboBox Margin="53,96,0,0" Width="198"/>
+        <StackPanel HorizontalAlignment="Left" Height="176" Margin="40,182,0,0" VerticalAlignment="Top" Width="258" Background="#FF4D4D4D">
+            <Slider Width="231"/>
+            <Slider Width="231"/>
+            <Slider Width="231"/>
+            <Slider Width="231"/>
+        </StackPanel>
 
     </Grid>
 </Page>
