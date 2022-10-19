@@ -34,11 +34,28 @@
                     </Grid.RenderTransform>
                     <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}"/>
                 </Grid>
+                <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0">
+                    <Grid.RenderTransform>
+                        <CompositeTransform ScaleX="-1"/>
+                    </Grid.RenderTransform>
+                    <Polygon Points="{Binding AnglePoints}" Fill="{Binding AngleColorString}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0">
+                        <Polygon.RenderTransform>
+                            <CompositeTransform Rotation="{Binding AngleAngle}"/>
+                        </Polygon.RenderTransform>
+                    </Polygon>
+                </Grid>
+                <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                    <Polygon Points="{Binding AnglePoints}" Fill="{Binding AngleColorString}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0">
+                        <Polygon.RenderTransform>
+                            <CompositeTransform Rotation="{Binding AngleAngle}"/>
+                        </Polygon.RenderTransform>
+                    </Polygon>
+                </Grid>
             </Grid>
         </Grid>
-        <Button x:Name="Center_button" Content="Center" Margin="20,20,0,0" VerticalAlignment="Top" Click="Center_button_Click" Visibility="{Binding GameBarState}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="219,26,0,0" Text="Pin me!" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="{Binding Pinned}" FontSize="16"/>
-        <Image HorizontalAlignment="Left" Height="33" Margin="279,6,0,0" VerticalAlignment="Top" Width="40" Source="/Assets/arrow-white.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Visibility="{Binding Pinned}">
+        <Button x:Name="Center_button" Content="Center" Margin="10,10,0,0" VerticalAlignment="Top" Click="Center_button_Click" Visibility="{Binding GameBarState}" CornerRadius="2,2,2,2" BorderBrush="#FFA4A4A4"/>
+        <TextBlock HorizontalAlignment="Left" Margin="224,26,0,0" Text="Pin me!" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="{Binding Pinned}" FontSize="16"/>
+        <Image HorizontalAlignment="Left" Height="33" Margin="283,6,0,0" VerticalAlignment="Top" Width="40" Source="/Assets/arrow-white.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Visibility="{Binding Pinned}">
             <Image.RenderTransform>
                 <CompositeTransform Rotation="-90"/>
             </Image.RenderTransform>

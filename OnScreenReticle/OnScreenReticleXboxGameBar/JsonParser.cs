@@ -68,9 +68,9 @@ namespace OnScreenReticleXboxGameBar
             DotColorB = 10;
             DotVisibility = true;
 
-            AngleThickness = 5;
-            AngleLength = 30;
-            AngleAngle = 90;
+            AngleThickness = 7;
+            AngleLength = 50;
+            AngleAngle = 65;//45~65
             AngleColorA = 255;
             AngleColorR = 255;
             AngleColorG = 0;
