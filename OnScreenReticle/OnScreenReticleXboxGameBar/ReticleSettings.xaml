@@ -6,16 +6,223 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="751" Height="726">
 
     <Grid>
         <Button Content="Set Default" Margin="90,45,0,0" VerticalAlignment="Top"/>
-        <ComboBox Margin="53,96,0,0" Width="198"/>
-        <StackPanel HorizontalAlignment="Left" Height="176" Margin="40,182,0,0" VerticalAlignment="Top" Width="258" Background="#FF4D4D4D">
-            <Slider Width="231"/>
-            <Slider Width="231"/>
-            <Slider Width="231"/>
-            <Slider Width="231"/>
+        <ComboBox Margin="53,96,0,0" Width="198" ItemsSource="{Binding SettingsList}" SelectedIndex="{Binding SettingsListIndex}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <StackPanel HorizontalAlignment="Left" Height="200" Margin="40,182,0,0" VerticalAlignment="Top" Width="325" Background="#FF4D4D4D">
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62*"/>
+                    <ColumnDefinition Width="190*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorA, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1" ValueChanged="DotColorA_slider_ValueChanged"/>
+                <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorA, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                <TextBlock TextWrapping="Wrap" Text="A" Margin="4,8,0,8"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62*"/>
+                    <ColumnDefinition Width="190*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorR, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
+                <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorR, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                <TextBlock TextWrapping="Wrap" Text="R" Margin="4,8,0,8"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62*"/>
+                    <ColumnDefinition Width="190*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorG, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
+                <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorG, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                <TextBlock TextWrapping="Wrap" Text="G" Margin="4,8,0,8"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62*"/>
+                    <ColumnDefinition Width="190*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorB, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
+                <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorB, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                <TextBlock TextWrapping="Wrap" Text="B" Margin="4,8,0,8"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62*"/>
+                    <ColumnDefinition Width="190*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.5"/>
+                <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+            </Grid>
+
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="260" Margin="40,433,0,0" VerticalAlignment="Top" Width="325" Background="#FF4D4D4D">
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="329" Margin="384,364,0,0" VerticalAlignment="Top" Width="325" Background="#FF4D4D4D">
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="83*"/>
+                </Grid.ColumnDefinitions>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="222"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="70" Margin="384,195,0,0" VerticalAlignment="Top" Width="325" Background="#FF4D4D4D">
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62*"/>
+                    <ColumnDefinition Width="190*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="Wrap" Text="Top" Margin="4,8,0,8"/>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding Top}" Grid.Column="1" Height="32" Maximum="600" LargeChange="1" SmallChange="0.1"/>
+                <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Top}" VerticalAlignment="Center" Height="32" Width="64"/>
+            </Grid>
+            <Grid Height="35">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62*"/>
+                    <ColumnDefinition Width="190*"/>
+                    <ColumnDefinition Width="73*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="Wrap" Text="Left" Margin="4,8,0,8"/>
+                <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding Left}" Grid.Column="1" Height="32" Maximum="250" LargeChange="1" SmallChange="0.1"/>
+                <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Left}" VerticalAlignment="Center" Height="32" Width="64"/>
+            </Grid>
         </StackPanel>
 
     </Grid>

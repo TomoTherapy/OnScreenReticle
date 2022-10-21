@@ -5,13 +5,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace OnScreenReticleXboxGameBar
 {
-    internal class JsonParser
+    public class JsonParser
     {
-        Settings settings;
-        JsonSerializer serializer;
+        private SettingsList settingsList;
+        private JsonSerializer serializer;
+
+        public SettingsList SettingsList { get => settingsList; set => settingsList = value; }
 
         public JsonParser()
         {
@@ -23,17 +26,19 @@ namespace OnScreenReticleXboxGameBar
         {
             serializer.NullValueHandling = NullValueHandling.Ignore;
 
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\OnScreenReticle\OnScreenReticle.json"; ;
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\OnScreenReticle\OnScreenReticle.json";
+            //string path = @"D:\OnScreenReticle\OnScreenReticle.json";
             using (StreamWriter sw = new StreamWriter(path))
             {
-                serializer.Serialize(sw, settings);
+                serializer.Serialize(sw, settingsList);
             }
         }
 
         public void DeserializeSettings()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\OnScreenReticle";
-            Directory.CreateDirectory(path);
+            //string path = @"D:\OnScreenReticle";
+            //Directory.CreateDirectory(path);
             string fullPath = Path.Combine(path, "OnScreenReticle.json");
 
             if (File.Exists(fullPath))
@@ -44,13 +49,25 @@ namespace OnScreenReticleXboxGameBar
                     json = sr.ReadToEnd();
                 }
 
-                settings = JsonConvert.DeserializeObject<Settings>(json);
+                settingsList = JsonConvert.DeserializeObject<SettingsList>(json);
             }
 
-            if (settings == null)
+            if (settingsList == null)
             {
-                settings = new Settings();
+                settingsList = new SettingsList() { ChosenOne = 0 };
+                settingsList.List.Add(new Settings() { Name = "Default" });
             }
+        }
+    }
+
+    public class SettingsList
+    {
+        public int ChosenOne { get; set; }
+        public List<Settings> List { get; set; }
+
+        public SettingsList()
+        {
+            List = new List<Settings>();
         }
     }
 
@@ -58,6 +75,8 @@ namespace OnScreenReticleXboxGameBar
     {
         public Settings()
         {
+            Name = "no name";
+
             Top = 250;
             Left = 125;
 
@@ -68,25 +87,27 @@ namespace OnScreenReticleXboxGameBar
             DotColorB = 10;
             DotVisibility = true;
 
-            AngleThickness = 7;
-            AngleLength = 50;
-            AngleAngle = 65;//45~65
+            AngleThickness = 4;
+            AngleLength = 30;
+            AngleAngle = 45;//35~70
             AngleColorA = 255;
-            AngleColorR = 255;
-            AngleColorG = 0;
-            AngleColorB = 0;
+            AngleColorR = 250;
+            AngleColorG = 10;
+            AngleColorB = 10;
             AngleVisibility = true;
 
-            CrossThickness = 5;
-            CrossLength = 30;
-            CrossOffset = 15;
+            CrossThickness = 3;
+            CrossLength = 15;
+            CrossOffset = 10;
             CrossRotation = 0;
             CrossColorA = 255;
-            CrossColorR = 255;
-            CrossColorG = 0;
-            CrossColorB = 0;
+            CrossColorR = 250;
+            CrossColorG = 10;
+            CrossColorB = 10;
             CrossVisibility = true; 
         }
+
+        public string Name { get; set; }
 
         public double Top { get; set; }
         public double Left { get; set; }

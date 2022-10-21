@@ -26,9 +26,13 @@ namespace OnScreenReticleXboxGameBar
     {
         private XboxGameBarWidget reticle;
         private XboxGameBarWidget reticleSettings;
+        private SettingsList settingsList;
         private Settings settings;
+        private JsonParser jsonParser;
 
         public Settings Settings { get => settings; set => settings = value; }
+        public SettingsList SettingsList { get => settingsList; set => settingsList = value; }
+        public JsonParser JsonParser { get => jsonParser; set => jsonParser = value; }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -39,7 +43,9 @@ namespace OnScreenReticleXboxGameBar
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            Settings = new Settings();
+            JsonParser = new JsonParser();
+            SettingsList = JsonParser.SettingsList;
+            Settings = SettingsList.List[SettingsList.ChosenOne];
         }
 
         protected override void OnActivated(IActivatedEventArgs args)
