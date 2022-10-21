@@ -63,7 +63,7 @@ namespace OnScreenReticleXboxGameBar
         public string AngleColorString { get => $"#{AngleColorA:X2}{AngleColorR:X2}{AngleColorG:X2}{AngleColorB:X2}"; }
         public bool AngleVisibility { get => settings.AngleVisibility; set { settings.AngleVisibility = value; } }
         public string AngleVisibilityString { get => AngleVisibility ? "Visible" : "Collapsed"; }
-        public string AnglePoints { get => $"0,0 {AngleLength},0 {AngleLength - (AngleThickness * (90 - (double)AngleAngle) / 45) * (AngleAngle < 45 ? (1 + (45 - AngleAngle) * 0.02) : (1 + (45 - AngleAngle) * 0.008))},{AngleThickness} {AngleThickness - AngleThickness * (55 - (double)AngleAngle) / 45},{AngleThickness}"; }
+        public string AnglePoints { get => $"0,0 {AngleLength},0 {AngleLength - AngleThickness * (90 - (double)AngleAngle) / 45 * (AngleAngle < 45 ? (1 + (45 - AngleAngle) * 0.02) : (1 + (45 - AngleAngle) * 0.008))},{AngleThickness} {AngleThickness - AngleThickness * (55 - (double)AngleAngle) / 45},{AngleThickness}"; }
 
         // Cross
         public double CrossThickness { get => settings.CrossThickness; set { settings.CrossThickness = value; } }

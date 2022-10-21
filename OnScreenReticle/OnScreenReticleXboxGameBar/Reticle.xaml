@@ -54,12 +54,18 @@
             </Grid>
         </Grid>
         <Button x:Name="Center_button" Content="Center" Margin="10,10,0,0" VerticalAlignment="Top" Click="Center_button_Click" Visibility="{Binding GameBarState}" CornerRadius="2,2,2,2" BorderBrush="#FFA4A4A4"/>
-        <TextBlock HorizontalAlignment="Left" Margin="224,26,0,0" Text="Pin me!" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="{Binding Pinned}" FontSize="16"/>
-        <Image HorizontalAlignment="Left" Height="33" Margin="283,6,0,0" VerticalAlignment="Top" Width="40" Source="/Assets/arrow-white.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Visibility="{Binding Pinned}">
+        <TextBlock HorizontalAlignment="Left" Margin="250,67,0,0" Text="Pin me!" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="{Binding Pinned}" FontSize="16"/>
+        <Image HorizontalAlignment="Left" Height="38" Margin="263,18,0,0" VerticalAlignment="Top" Width="68" Source="/Assets/white-brushed-arrow-long.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Visibility="{Binding Pinned}" Stretch="Uniform">
             <Image.RenderTransform>
                 <CompositeTransform Rotation="-90"/>
             </Image.RenderTransform>
         </Image>
         <Image HorizontalAlignment="Center" Height="204" Margin="0,24,0,0" VerticalAlignment="Center" Width="270" Source="/Assets/EnableClickThrough.png" Visibility="{Binding ClickThroughEnabled}" Stretch="None"/>
+        <TextBlock HorizontalAlignment="Left" Margin="133,25,0,0" Text="Reticle Settings" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Visibility="{Binding GameBarState}"/>
+        <Image HorizontalAlignment="Left" Height="33" Margin="245,8,0,0" VerticalAlignment="Top" Width="40" Source="/Assets/white-brushed-arrow-short.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Visibility="{Binding GameBarState}">
+            <Image.RenderTransform>
+                <CompositeTransform Rotation="-90"/>
+            </Image.RenderTransform>
+        </Image>
     </Grid>
 </Page>

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Windows.Storage;
 
 namespace OnScreenReticleXboxGameBar
 {
@@ -13,42 +15,35 @@ namespace OnScreenReticleXboxGameBar
     {
         private SettingsList settingsList;
         private JsonSerializer serializer;
+        private Windows.Storage.StorageFolder installedLocation;
 
         public SettingsList SettingsList { get => settingsList; set => settingsList = value; }
 
         public JsonParser()
         {
+            installedLocation = Windows.ApplicationModel.Package.Current.InstalledLocation;
+
             serializer = new JsonSerializer();
             DeserializeSettings();
         }
 
-        public void SerializeSettings()
+        public async void SerializeSettings()
         {
-            serializer.NullValueHandling = NullValueHandling.Ignore;
+            // Create sample file; replace if exists.
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile jsonFile = await storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting);
 
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\OnScreenReticle\OnScreenReticle.json";
-            //string path = @"D:\OnScreenReticle\OnScreenReticle.json";
-            using (StreamWriter sw = new StreamWriter(path))
-            {
-                serializer.Serialize(sw, settingsList);
-            }
+            await FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList));
         }
 
-        public void DeserializeSettings()
+        public async void DeserializeSettings()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\OnScreenReticle";
-            //string path = @"D:\OnScreenReticle";
-            //Directory.CreateDirectory(path);
-            string fullPath = Path.Combine(path, "OnScreenReticle.json");
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
 
-            if (File.Exists(fullPath))
+            if (File.Exists(Path.Combine(storageFolder.Path, "OnScreenReticle.json")))
             {
-                string json = "";
-                using (StreamReader sr = new StreamReader(fullPath))
-                {
-                    json = sr.ReadToEnd();
-                }
-
+                StorageFile jsonFile = await storageFolder.GetFileAsync("OnScreenReticle.json");
+                string json = await FileIO.ReadTextAsync(jsonFile);
                 settingsList = JsonConvert.DeserializeObject<SettingsList>(json);
             }
 
