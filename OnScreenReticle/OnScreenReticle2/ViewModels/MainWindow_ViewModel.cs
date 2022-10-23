@@ -19,6 +19,7 @@ namespace OnScreenReticle2.ViewModels
         private NotifyIcon Noti;
         private bool allVisibility;
 
+
         public double DotDiameter { get => settings.DotDiameter; set { settings.DotDiameter = Math.Round(value, 1); RaisePropertyChanged(); } }
         public double AngleThickness { get => settings.AngleThickness; set { settings.AngleThickness = Math.Round(value, 1); RaisePropertyChanged(); } }
         public double AngleLength { get => settings.AngleLength; set { settings.AngleLength = Math.Round(value, 1); RaisePropertyChanged(); } }
