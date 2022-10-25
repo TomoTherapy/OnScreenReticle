@@ -26,6 +26,10 @@ namespace OnScreenReticleXboxGameBar
     {
         private XboxGameBarWidget reticle;
         private XboxGameBarWidget reticleSettings;
+
+        public Reticle reticleUWP;
+        public ReticleSettings reticleSettingsUWP;
+
         private SettingsList settingsList;
         private Settings settings;
         private JsonParser jsonParser;
@@ -74,12 +78,14 @@ namespace OnScreenReticleXboxGameBar
                         case "Reticle":
                             reticle = new XboxGameBarWidget(widgetArgs, Window.Current.CoreWindow, rootFrame);
                             rootFrame.Navigate(typeof(Reticle), reticle);
+                            reticleUWP = rootFrame.Content as Reticle;
 
                             Window.Current.Closed += Reticle_Closed;
                             break;
                         case "ReticleSettings":
                             reticleSettings = new XboxGameBarWidget(widgetArgs, Window.Current.CoreWindow, rootFrame);
                             rootFrame.Navigate(typeof(ReticleSettings), reticleSettings);
+                            reticleSettingsUWP = rootFrame.Content as ReticleSettings;
 
                             Window.Current.Closed += ReticleSettings_Closed;
                             break;
@@ -103,6 +109,7 @@ namespace OnScreenReticleXboxGameBar
             reticle = null;
             Window.Current.Closed -= Reticle_Closed;
         }
+
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

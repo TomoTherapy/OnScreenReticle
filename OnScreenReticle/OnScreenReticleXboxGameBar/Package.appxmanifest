@@ -53,21 +53,17 @@
               <GameBarWidget Type="Standard">
                 <HomeMenuVisible>true</HomeMenuVisible>
                 <PinningSupported>true</PinningSupported>
-                <SettingsSupported AppExtensionId="ReticleSettings"/>
+                <!--<SettingsSupported AppExtensionId="ReticleSettings"/>-->
                 <ActivateAfterInstall>true</ActivateAfterInstall>
                 <Window>
                   <AllowForegroundTransparency>true</AllowForegroundTransparency>
                   <Size>
-                    <Height>600</Height>
-                    <Width>350</Width>
-                    <MinHeight>600</MinHeight>
-                    <MinWidth>350</MinWidth>
-                    <MaxHeight>600</MaxHeight>
-                    <MaxWidth>350</MaxWidth>
+                    <Height>1000</Height>
+                    <Width>700</Width>
                   </Size>
                   <ResizeSupported>
-                    <Horizontal>true</Horizontal>
-                    <Vertical>true</Vertical>
+                    <Horizontal>false</Horizontal>
+                    <Vertical>false</Vertical>
                   </ResizeSupported>
                 </Window>
               </GameBarWidget>

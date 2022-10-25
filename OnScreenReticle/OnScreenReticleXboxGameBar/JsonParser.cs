@@ -50,7 +50,7 @@ namespace OnScreenReticleXboxGameBar
             if (settingsList == null)
             {
                 settingsList = new SettingsList() { ChosenOne = 0 };
-                settingsList.List.Add(new Settings() { Name = "Default" });
+                settingsList.List.Add(new Settings() { Name = "Model 1" });
             }
         }
     }
