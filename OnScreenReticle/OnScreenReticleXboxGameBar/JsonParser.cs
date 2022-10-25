@@ -72,7 +72,7 @@ namespace OnScreenReticleXboxGameBar
         {
             Name = "no name";
 
-            Top = 250;
+            Top = 300;
             Left = 125;
 
             DotDiameter = 6;

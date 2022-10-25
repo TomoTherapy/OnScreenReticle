@@ -10,64 +10,64 @@
         <Grid Width="350" Height="700">
             <Grid Name="Reticle_grid" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="{Binding MarginString}">
                 <Ellipse Width="{Binding DotDiameter}" Height="{Binding DotDiameter}" Fill="{Binding DotColorString}" Visibility="{Binding DotVisibilityString}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0">
+                    <Grid.RenderTransform>
+                        <CompositeTransform ScaleX="-1"/>
+                    </Grid.RenderTransform>
+                    <Polygon Points="{Binding AnglePoints}" Fill="{Binding AngleColorString}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" Visibility="{Binding AngleVisibilityString}">
+                        <Polygon.RenderTransform>
+                            <CompositeTransform Rotation="{Binding AngleAngle}"/>
+                        </Polygon.RenderTransform>
+                    </Polygon>
+                </Grid>
+                <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                    <Polygon Points="{Binding AnglePoints}" Fill="{Binding AngleColorString}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" Visibility="{Binding AngleVisibilityString}">
+                        <Polygon.RenderTransform>
+                            <CompositeTransform Rotation="{Binding AngleAngle}"/>
+                        </Polygon.RenderTransform>
+                    </Polygon>
+                </Grid>
                 <Grid RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
                         <CompositeTransform Rotation="{Binding CrossRotation}"/>
                     </Grid.RenderTransform>
                     <Grid Width="100" Height="50" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}"/>
+                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top"/>
                     </Grid>
                     <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Grid.RenderTransform>
                             <CompositeTransform Rotation="180"/>
                         </Grid.RenderTransform>
-                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}"/>
+                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top"/>
                     </Grid>
                     <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.25,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Grid.RenderTransform>
                             <CompositeTransform Rotation="90"/>
                         </Grid.RenderTransform>
-                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}"/>
+                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top"/>
                     </Grid>
                     <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.75,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Grid.RenderTransform>
                             <CompositeTransform Rotation="-90"/>
                         </Grid.RenderTransform>
-                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}"/>
-                    </Grid>
-                    <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0">
-                        <Grid.RenderTransform>
-                            <CompositeTransform ScaleX="-1"/>
-                        </Grid.RenderTransform>
-                        <Polygon Points="{Binding AnglePoints}" Fill="{Binding AngleColorString}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0">
-                            <Polygon.RenderTransform>
-                                <CompositeTransform Rotation="{Binding AngleAngle}"/>
-                            </Polygon.RenderTransform>
-                        </Polygon>
-                    </Grid>
-                    <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
-                        <Polygon Points="{Binding AnglePoints}" Fill="{Binding AngleColorString}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0">
-                            <Polygon.RenderTransform>
-                                <CompositeTransform Rotation="{Binding AngleAngle}"/>
-                            </Polygon.RenderTransform>
-                        </Polygon>
+                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
         <Button x:Name="Center_button" Content="Center" Margin="10,10,0,0" VerticalAlignment="Top" Click="Center_button_Click" Visibility="{Binding GameBarState}" CornerRadius="2,2,2,2" BorderBrush="#FFA4A4A4"/>
-        <TextBlock HorizontalAlignment="Right" Margin="0,67,47,0" Text="Pin me!" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="{Binding Pinned}" FontSize="16"/>
-        <Image HorizontalAlignment="Right" Height="38" Margin="0,18,19,0" VerticalAlignment="Top" Width="68" Source="/Assets/white-brushed-arrow-long.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Visibility="{Binding Pinned}" Stretch="Uniform">
+        <TextBlock HorizontalAlignment="Right" Margin="0,37,79,0" Text="Pin me!" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="{Binding Pinned}" FontSize="16"/>
+        <Image HorizontalAlignment="Right" Height="38" Margin="0,12,32,0" VerticalAlignment="Top" Width="46" Source="/Assets/white-brushed-arrow-short.png" RenderTransformOrigin="0.5,0.5" Visibility="{Binding Pinned}" Stretch="Uniform" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Image.RenderTransform>
                 <CompositeTransform Rotation="-90"/>
             </Image.RenderTransform>
         </Image>
         <Image HorizontalAlignment="Center" Height="204" Margin="0,24,0,0" VerticalAlignment="Center" Width="270" Source="/Assets/EnableClickThrough.png" Visibility="{Binding ClickThroughEnabled}" Stretch="None"/>
-        <Grid HorizontalAlignment="Left" Height="573" Margin="-1,105,0,0" VerticalAlignment="Top" Width="361" Background="#FF656565">
-            <StackPanel HorizontalAlignment="Left" Height="214" Margin="22,18,0,0" VerticalAlignment="Top" Width="325" Background="#FF4D4D4D">
-                <Grid Background="#FFF17D7D">
-                    <TextBlock Text="Dot"/>
-                    <CheckBox IsChecked="True" Margin="293,0,0,0"/>
+        <Grid HorizontalAlignment="Left" Height="573" Margin="-1,127,0,0" VerticalAlignment="Top" Width="361" Background="#33000000" Visibility="{Binding GameBarState}">
+            <StackPanel HorizontalAlignment="Center" Height="217" Margin="0,18,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF">
+                <Grid Background="#3FFFFFFF" Margin="0,0,0,3">
+                    <TextBlock Text="DOT" FocusVisualPrimaryBrush="White" VerticalAlignment="Center" HorizontalAlignment="Stretch" Padding="9,0,0,0" FontWeight="Normal" FontSize="16"/>
+                    <CheckBox IsChecked="{Binding DotVisibility, Mode=TwoWay}" Margin="293,0,0,0"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -77,7 +77,7 @@
                     </Grid.ColumnDefinitions>
                     <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorA, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
                     <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorA, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="A" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Alpha" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -87,7 +87,7 @@
                     </Grid.ColumnDefinitions>
                     <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorR, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
                     <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorR, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="R" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Red" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -97,7 +97,7 @@
                     </Grid.ColumnDefinitions>
                     <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorG, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
                     <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorG, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="G" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Green" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -107,7 +107,7 @@
                     </Grid.ColumnDefinitions>
                     <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorB, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
                     <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorB, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="B" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Blue" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -117,13 +117,13 @@
                     </Grid.ColumnDefinitions>
                     <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
                     <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Height="272" Margin="22,269,0,0" VerticalAlignment="Top" Width="325" Background="#FF4D4D4D">
-                <Grid Background="#FFF17D7D">
-                    <TextBlock Text="ANGLE"/>
-                    <CheckBox IsChecked="True" Margin="293,0,0,0"/>
+            <StackPanel HorizontalAlignment="Left" Height="286" Margin="22,263,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF">
+                <Grid Background="#3FFFFFFF" Margin="0,0,0,3">
+                    <TextBlock Text="ANGLE" VerticalAlignment="Center" Padding="9,0,0,0" FontSize="16"/>
+                    <CheckBox IsChecked="{Binding AngleVisibility, Mode=TwoWay}" Margin="293,0,0,0" VerticalAlignment="Center"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -131,9 +131,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Alpha" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleColorA, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1" SmallChange="1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleColorA, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -141,9 +141,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Red" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleColorR, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleColorR, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -151,9 +151,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Green" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleColorG, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleColorG, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -161,9 +161,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Blue" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleColorB, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleColorB, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -171,9 +171,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Thickness" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleThickness, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleThickness, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -181,9 +181,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Length" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleLength, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleLength, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -191,17 +191,17 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleAngle, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleAngle, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                    <TextBlock TextWrapping="Wrap" Text="Angle" Margin="4,8,0,8"/>
                 </Grid>
             </StackPanel>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="573" Margin="640,105,0,0" VerticalAlignment="Top" Width="374" Background="#FF8A8A8A">
-            <StackPanel HorizontalAlignment="Left" Height="329" Margin="19,203,0,0" VerticalAlignment="Top" Width="325" Background="#FF4D4D4D">
-                <Grid Background="#FFF17D7D">
-                    <TextBlock Text="CROSS"/>
-                    <CheckBox IsChecked="True" Margin="293,0,0,0"/>
+        <Grid HorizontalAlignment="Left" Height="573" Margin="640,127,0,0" VerticalAlignment="Top" Width="360" Background="#33000000" Visibility="{Binding GameBarState}">
+            <StackPanel HorizontalAlignment="Left" Height="323" Margin="19,210,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF">
+                <Grid Background="#3FFFFFFF" Margin="0,0,0,3">
+                    <TextBlock Text="CROSS" VerticalAlignment="Center" FontSize="16" Padding="9,0,0,0"/>
+                    <CheckBox IsChecked="{Binding CrossVisibility, Mode=TwoWay}" Margin="293,0,0,0"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -209,9 +209,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossColorA, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossColorA, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                    <TextBlock TextWrapping="Wrap" Text="Alpha" Margin="4,8,0,8"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -219,9 +219,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Red" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossColorR, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1" SmallChange="1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossColorR, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -229,9 +229,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Green" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossColorG, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossColorG, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -239,9 +239,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Blue" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossColorB, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossColorB, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -249,9 +249,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Thickness" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossThickness, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossThickness, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -259,9 +259,9 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Length" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossLength, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="50" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossLength, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -269,14 +269,24 @@
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Text="Offset" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossOffset, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="30" LargeChange="1" SmallChange="0.5" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossOffset, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                </Grid>
+                <Grid Height="35">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="190*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Rotation" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossRotation, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="90" LargeChange="1" SmallChange="0.5" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossRotation, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Height="103" Margin="19,83,0,0" VerticalAlignment="Top" Width="325" Background="#FF4D4D4D">
-                <Grid Background="#FFF17D7D">
-                    <TextBlock Text="POSITION"/>
+            <StackPanel HorizontalAlignment="Left" Height="111" Margin="19,83,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF">
+                <Grid Background="#3FFFFFFF" Height="32" Margin="0,0,0,3">
+                    <TextBlock Text="POSITION" VerticalAlignment="Center" FontSize="16" Padding="9,0,0,0"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -301,7 +311,7 @@
             </StackPanel>
             <TextBox HorizontalAlignment="Left" Margin="19,21,0,0" TextWrapping="Wrap" Text="{Binding SettingsName}" VerticalAlignment="Top" Width="209"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="99" Margin="176,14,0,0" VerticalAlignment="Top" Width="603" Background="#FF7B7B7B">
+        <Grid HorizontalAlignment="Center" Height="99" Margin="0,14,0,0" VerticalAlignment="Top" Width="603" Background="#33000000" Visibility="{Binding GameBarState}">
             <Button x:Name="SetDefault_button" Content="Set Default" Margin="91,7,0,0" VerticalAlignment="Top" Click="SetDefault_button_Click"/>
             <ComboBox Margin="54,58,0,0" Width="198" ItemsSource="{Binding SettingsList.List}" SelectedIndex="{Binding SettingsListIndex}">
                 <ComboBox.ItemTemplate>
