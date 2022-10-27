@@ -56,9 +56,9 @@ namespace OnScreenReticleXboxGameBar
         public string NewSettingName { get => newSettingName; set { newSettingName = value; NotifyPropertyChanged(); } }
 
         // Location
-        public double Top { get => settings.Top; set { settings.Top = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(MarginString)); } }
-        public double Left { get => settings.Left; set { settings.Left = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(MarginString)); } }
-        public string MarginString { get => $"{Left},{Top},0,0"; }
+        public double Top { get => settings.Top - 300; set { settings.Top = value + 300; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(MarginString)); } }
+        public double Left { get => settings.Left - 125; set { settings.Left = value + 125; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(MarginString)); } }
+        public string MarginString { get => $"{Left + 125},{Top + 300},0,0"; }
 
         // Dot
         public double DotDiameter { get => settings.DotDiameter; set { settings.DotDiameter = value; NotifyPropertyChanged(); } }
