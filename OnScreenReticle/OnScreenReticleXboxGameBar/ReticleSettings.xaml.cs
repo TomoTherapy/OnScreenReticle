@@ -71,11 +71,11 @@ namespace OnScreenReticleXboxGameBar
                 settings.DotDiameter = value; NotifyPropertyChanged();
             }
         }
-        public int DotColorA { get => settings.DotColorA; set { settings.DotColorA = value; NotifyPropertyChanged(); } }
-        public int DotColorR { get => settings.DotColorR; set { settings.DotColorR = value; NotifyPropertyChanged(); } }
-        public int DotColorG { get => settings.DotColorG; set { settings.DotColorG = value; NotifyPropertyChanged(); } }
-        public int DotColorB { get => settings.DotColorB; set { settings.DotColorB = value; NotifyPropertyChanged(); } }
-        public string DotColorString { get => $"#{DotColorA:X2}{DotColorR:X2}{DotColorG:X2}{DotColorB:X2}"; }
+        //public int DotColorA { get => settings.DotColorA; set { settings.DotColorA = value; NotifyPropertyChanged(); } }
+        //public int DotColorR { get => settings.DotColorR; set { settings.DotColorR = value; NotifyPropertyChanged(); } }
+        //public int DotColorG { get => settings.DotColorG; set { settings.DotColorG = value; NotifyPropertyChanged(); } }
+        //public int DotColorB { get => settings.DotColorB; set { settings.DotColorB = value; NotifyPropertyChanged(); } }
+        //public string DotColorString { get => $"#{DotColorA:X2}{DotColorR:X2}{DotColorG:X2}{DotColorB:X2}"; }
         public bool DotVisibility { get => settings.DotVisibility; set { settings.DotVisibility = value; NotifyPropertyChanged(); } }
         public string DotVisibilityString { get => DotVisibility ? "Visible" : "Collapsed"; }
 
@@ -83,11 +83,11 @@ namespace OnScreenReticleXboxGameBar
         public double AngleThickness { get => settings.AngleThickness; set { settings.AngleThickness = value; NotifyPropertyChanged(); } }
         public double AngleLength { get => settings.AngleLength; set { settings.AngleLength = value; NotifyPropertyChanged(); } }
         public double AngleAngle { get => settings.AngleAngle; set { settings.AngleAngle = value; NotifyPropertyChanged(); } }
-        public int AngleColorA { get => settings.AngleColorA; set { settings.AngleColorA = value; NotifyPropertyChanged(); } }
-        public int AngleColorR { get => settings.AngleColorR; set { settings.AngleColorR = value; NotifyPropertyChanged(); } }
-        public int AngleColorG { get => settings.AngleColorG; set { settings.AngleColorG = value; NotifyPropertyChanged(); } }
-        public int AngleColorB { get => settings.AngleColorB; set { settings.AngleColorB = value; NotifyPropertyChanged(); } }
-        public string AngleColorString { get => $"#{AngleColorA:X2}{AngleColorR:X2}{AngleColorG:X2}{AngleColorB:X2}"; }
+        //public int AngleColorA { get => settings.AngleColorA; set { settings.AngleColorA = value; NotifyPropertyChanged(); } }
+        //public int AngleColorR { get => settings.AngleColorR; set { settings.AngleColorR = value; NotifyPropertyChanged(); } }
+        //public int AngleColorG { get => settings.AngleColorG; set { settings.AngleColorG = value; NotifyPropertyChanged(); } }
+        //public int AngleColorB { get => settings.AngleColorB; set { settings.AngleColorB = value; NotifyPropertyChanged(); } }
+        //public string AngleColorString { get => $"#{AngleColorA:X2}{AngleColorR:X2}{AngleColorG:X2}{AngleColorB:X2}"; }
         public bool AngleVisibility { get => settings.AngleVisibility; set { settings.AngleVisibility = value; NotifyPropertyChanged(); } }
         public string AngleVisibilityString { get => AngleVisibility ? "Visible" : "Collapsed"; }
         public string AnglePoints { get => $"0,0 {AngleLength},0 {AngleLength - AngleThickness * (90 - (double)AngleAngle) / 45 * (AngleAngle < 45 ? (1 + (45 - AngleAngle) * 0.02) : (1 + (45 - AngleAngle) * 0.008))},{AngleThickness} {AngleThickness - AngleThickness * (55 - (double)AngleAngle) / 45},{AngleThickness}"; }
@@ -98,11 +98,11 @@ namespace OnScreenReticleXboxGameBar
         public double CrossOffset { get => settings.CrossOffset; set { settings.CrossOffset = value; NotifyPropertyChanged(); } }
         public string CrossOffsetString { get => $"0,{CrossOffset},0,0"; }
         public double CrossRotation { get => settings.CrossRotation; set { settings.CrossRotation = value; NotifyPropertyChanged(); } }
-        public int CrossColorA { get => settings.CrossColorA; set { settings.CrossColorA = value; NotifyPropertyChanged(); } }
-        public int CrossColorR { get => settings.CrossColorR; set { settings.CrossColorR = value; NotifyPropertyChanged(); } }
-        public int CrossColorG { get => settings.CrossColorG; set { settings.CrossColorG = value; NotifyPropertyChanged(); } }
-        public int CrossColorB { get => settings.CrossColorB; set { settings.CrossColorB = value; NotifyPropertyChanged(); } }
-        public string CrossColorString { get => $"#{CrossColorA:X2}{CrossColorR:X2}{CrossColorG:X2}{CrossColorB:X2}"; }
+        //public int CrossColorA { get => settings.CrossColorA; set { settings.CrossColorA = value; NotifyPropertyChanged(); } }
+        //public int CrossColorR { get => settings.CrossColorR; set { settings.CrossColorR = value; NotifyPropertyChanged(); } }
+        //public int CrossColorG { get => settings.CrossColorG; set { settings.CrossColorG = value; NotifyPropertyChanged(); } }
+        //public int CrossColorB { get => settings.CrossColorB; set { settings.CrossColorB = value; NotifyPropertyChanged(); } }
+        //public string CrossColorString { get => $"#{CrossColorA:X2}{CrossColorR:X2}{CrossColorG:X2}{CrossColorB:X2}"; }
         public bool CrossVisibility { get => settings.CrossVisibility; set { settings.CrossVisibility = value; NotifyPropertyChanged(); } }
         public string CrossVisibilityString { get => CrossVisibility ? "Visible" : "Collapsed"; }
 
@@ -118,20 +118,20 @@ namespace OnScreenReticleXboxGameBar
 
         private void NotifyAllProperties()
         {
-            NotifyPropertyChanged(nameof(DotDiameter));
-            NotifyPropertyChanged(nameof(DotColorString));
-            NotifyPropertyChanged(nameof(DotVisibilityString));
+            //NotifyPropertyChanged(nameof(DotDiameter));
+            //NotifyPropertyChanged(nameof(DotColorString));
+            //NotifyPropertyChanged(nameof(DotVisibilityString));
 
-            NotifyPropertyChanged(nameof(AngleColorString));
-            NotifyPropertyChanged(nameof(AngleVisibilityString));
-            NotifyPropertyChanged(nameof(AnglePoints));
+            //NotifyPropertyChanged(nameof(AngleColorString));
+            //NotifyPropertyChanged(nameof(AngleVisibilityString));
+            //NotifyPropertyChanged(nameof(AnglePoints));
 
-            NotifyPropertyChanged(nameof(CrossThickness));
-            NotifyPropertyChanged(nameof(CrossLength));
-            NotifyPropertyChanged(nameof(CrossOffsetString));
-            NotifyPropertyChanged(nameof(CrossRotation));
-            NotifyPropertyChanged(nameof(CrossColorString));
-            NotifyPropertyChanged(nameof(CrossVisibilityString));
+            //NotifyPropertyChanged(nameof(CrossThickness));
+            //NotifyPropertyChanged(nameof(CrossLength));
+            //NotifyPropertyChanged(nameof(CrossOffsetString));
+            //NotifyPropertyChanged(nameof(CrossRotation));
+            //NotifyPropertyChanged(nameof(CrossColorString));
+            //NotifyPropertyChanged(nameof(CrossVisibilityString));
         }
 
         private void New_button_Click(object sender, RoutedEventArgs e)

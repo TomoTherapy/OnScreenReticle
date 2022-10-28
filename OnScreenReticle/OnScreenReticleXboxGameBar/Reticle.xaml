@@ -5,8 +5,29 @@
     xmlns:local="using:OnScreenReticleXboxGameBar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Width="1000" Height="700" UseLayoutRounding="True">
+    mc:Ignorable="d" Width="1000" Height="700" UseLayoutRounding="True" Language="en-US">
     <Page.Resources>
+        <SolidColorBrush x:Key="ThemeColor" Color="#FFff7f00"/>
+        <Style TargetType="Border" x:Key="TitleBorder">
+            <Setter Property="Margin" Value="-1,-1,-1,3"/>
+            <Setter Property="BorderBrush" Value="#4FFFFFFF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+        <Style TargetType="Grid" x:Key="ColorItemGrid">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Padding" Value="0,-10,0,-10"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TitleTextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="9,0,0,0"/>
+        </Style>
+        
+        <Style TargetType="FlyoutPresenter">
+            <Setter Property="Background" Value="#6F000000"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
         <Style TargetType="TextBox">
             <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}"/>
             <Setter Property="Background" Value="{ThemeResource TextControlBackground}"/>
@@ -25,6 +46,9 @@
             <Setter Property="ContextFlyout" Value="{StaticResource TextControlCommandBarContextFlyout}"/>
             <Setter Property="SelectionFlyout" Value="{StaticResource TextControlCommandBarSelectionFlyout}"/>
             <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Width" Value="64"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -253,8 +277,7 @@
             <Setter Property="Padding" Value="7,0,7,0"/>
             <Setter Property="Background" Value="{ThemeResource SliderTrackFill}"/>
             <Setter Property="BorderThickness" Value="{ThemeResource SliderBorderThemeThickness}"/>
-            <!--<Setter Property="Foreground" Value="{ThemeResource SliderTrackValueFill}"/>-->
-            <Setter Property="Foreground" Value="#FFFFFFFF"/>
+            <Setter Property="Foreground" Value="{ThemeResource SliderTrackValueFill}"/>
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
             <Setter Property="ManipulationMode" Value="None"/>
@@ -270,8 +293,7 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="Thumb">
-                                                <!--<Border BorderThickness="1" CornerRadius="50" Background="#FF499FFF" BorderBrush="#FF5A82FF" Width="15" Height="15"/>-->
-                                                <Rectangle Width="15" Height="15" Fill="AliceBlue"/>
+                                                <Border BorderThickness="2" CornerRadius="50" Background="White" BorderBrush="{StaticResource ThemeColor}" Width="15" Height="15"/>
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
@@ -447,19 +469,29 @@
     <Grid>
         <Grid Width="350" Height="700">
             <Grid Name="Reticle_grid" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="{Binding MarginString}">
-                <Ellipse Width="{Binding DotDiameter}" Height="{Binding DotDiameter}" Fill="{Binding DotColorString}" Visibility="{Binding DotVisibilityString}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Ellipse Width="{Binding DotDiameter}" Height="{Binding DotDiameter}" Visibility="{Binding DotVisibilityString}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{Binding DotColor}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
                 <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0">
                     <Grid.RenderTransform>
                         <CompositeTransform ScaleX="-1"/>
                     </Grid.RenderTransform>
-                    <Polygon Points="{Binding AnglePoints}" Fill="{Binding AngleColorString}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" Visibility="{Binding AngleVisibilityString}">
+                    <Polygon Points="{Binding AnglePoints}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" Visibility="{Binding AngleVisibilityString}">
+                        <Polygon.Fill>
+                            <SolidColorBrush Color="{Binding AngleColor}"/>
+                        </Polygon.Fill>
                         <Polygon.RenderTransform>
                             <CompositeTransform Rotation="{Binding AngleAngle}"/>
                         </Polygon.RenderTransform>
                     </Polygon>
                 </Grid>
                 <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
-                    <Polygon Points="{Binding AnglePoints}" Fill="{Binding AngleColorString}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" Visibility="{Binding AngleVisibilityString}">
+                    <Polygon Points="{Binding AnglePoints}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" Visibility="{Binding AngleVisibilityString}">
+                        <Polygon.Fill>
+                            <SolidColorBrush Color="{Binding AngleColor}"/>
+                        </Polygon.Fill>
                         <Polygon.RenderTransform>
                             <CompositeTransform Rotation="{Binding AngleAngle}"/>
                         </Polygon.RenderTransform>
@@ -470,25 +502,41 @@
                         <CompositeTransform Rotation="{Binding CrossRotation}"/>
                     </Grid.RenderTransform>
                     <Grid Width="100" Height="50" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top"/>
+                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding CrossColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
                     </Grid>
                     <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Grid.RenderTransform>
                             <CompositeTransform Rotation="180"/>
                         </Grid.RenderTransform>
-                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top"/>
+                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding CrossColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
                     </Grid>
                     <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.25,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Grid.RenderTransform>
                             <CompositeTransform Rotation="90"/>
                         </Grid.RenderTransform>
-                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top"/>
+                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding CrossColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
                     </Grid>
                     <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.75,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Grid.RenderTransform>
                             <CompositeTransform Rotation="-90"/>
                         </Grid.RenderTransform>
-                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Fill="{Binding CrossColorString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top"/>
+                        <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding CrossColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
                     </Grid>
                 </Grid>
             </Grid>
@@ -501,185 +549,49 @@
             </Image.RenderTransform>
         </Image>
         <Image HorizontalAlignment="Center" Height="204" Margin="0,24,0,0" VerticalAlignment="Center" Width="270" Source="/Assets/EnableClickThrough.png" Visibility="{Binding ClickThroughEnabled}" Stretch="None"/>
-        <Grid HorizontalAlignment="Left" Height="573" Margin="-1,127,0,0" VerticalAlignment="Top" Width="361" Background="#33000000" Visibility="{Binding GameBarState}">
-            <StackPanel HorizontalAlignment="Center" Height="217" Margin="0,18,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF">
-                <Grid Background="#3FFFFFFF" Margin="0,0,0,3">
-                    <TextBlock Text="DOT" FocusVisualPrimaryBrush="White" VerticalAlignment="Center" HorizontalAlignment="Stretch" Padding="9,0,0,0" FontWeight="Normal" FontSize="16"/>
-                    <CheckBox IsChecked="{Binding DotVisibility, Mode=TwoWay}" Margin="293,0,0,0"/>
-                </Grid>
-                <Grid Height="35">
+        <Grid HorizontalAlignment="Left" Height="573" Margin="-1,127,0,0" VerticalAlignment="Top" Width="361" Background="#33000000" Visibility="{Binding GameBarState}"/>
+        <Grid HorizontalAlignment="Left" Height="700" Margin="640,0,0,0" VerticalAlignment="Center" Width="360" Background="#33000000" Visibility="{Binding GameBarState}" CornerRadius="5">
+            <StackPanel HorizontalAlignment="Center" Height="211" Margin="0,479,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5">
+                <Border Style="{StaticResource TitleBorder}">
+                    <Grid>
+                        <TextBlock Text="CROSS" Style="{StaticResource TitleTextBlock}"/>
+                    </Grid>
+                </Border>
+                <Grid Style="{StaticResource ColorItemGrid}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="62*"/>
                         <ColumnDefinition Width="190*"/>
                         <ColumnDefinition Width="73*"/>
                     </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorA, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorA, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Opacity" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorR, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorR, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Red" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorG, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorG, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Green" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotColorB, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="10" SmallChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotColorB, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Blue" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                </Grid>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Height="286" Margin="22,263,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF">
-                <Grid Background="#3FFFFFFF" Margin="0,0,0,3">
-                    <TextBlock Text="ANGLE" VerticalAlignment="Center" Padding="9,0,0,0" FontSize="16"/>
-                    <CheckBox IsChecked="{Binding AngleVisibility, Mode=TwoWay}" Margin="293,0,0,0" VerticalAlignment="Center"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Opacity" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleColorA, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1" SmallChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleColorA, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Red" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleColorR, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleColorR, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Green" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleColorG, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleColorG, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Blue" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleColorB, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleColorB, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Thickness" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleThickness, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="10" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleThickness, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Length" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleLength, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="50" LargeChange="1" SmallChange="0.5" Minimum="5" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleLength, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleAngle, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="70" LargeChange="1" SmallChange="0.5" Minimum="35" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleAngle, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Angle" Margin="4,8,0,8"/>
-                </Grid>
-            </StackPanel>
-        </Grid>
-        <Grid HorizontalAlignment="Left" Height="573" Margin="640,127,0,0" VerticalAlignment="Top" Width="360" Background="#33000000" Visibility="{Binding GameBarState}">
-            <StackPanel HorizontalAlignment="Left" Height="323" Margin="19,210,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF">
-                <Grid Background="#3FFFFFFF" Margin="0,0,0,3">
-                    <TextBlock Text="CROSS" VerticalAlignment="Center" FontSize="16" Padding="9,0,0,0"/>
-                    <CheckBox IsChecked="{Binding CrossVisibility, Mode=TwoWay}" Margin="293,0,0,0"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossColorA, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossColorA, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                    <TextBlock TextWrapping="Wrap" Text="Opacity" Margin="4,8,0,8"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Red" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossColorR, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1" SmallChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossColorR, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Green" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossColorG, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossColorG, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
-                </Grid>
-                <Grid Height="35">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="190*"/>
-                        <ColumnDefinition Width="73*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock TextWrapping="Wrap" Text="Blue" Margin="4,8,0,8"/>
-                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossColorB, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="255" LargeChange="1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossColorB, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                    <Button Name="CrossColorButton" Width="30" Height="30" Margin="5" BorderBrush="#FFAAAAAA" BorderThickness="2" CornerRadius="5" Padding="0" HorizontalAlignment="Right" Grid.Column="2">
+                        <Rectangle Name="CrossColorRectangle" Width="26" Height="26">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding CrossColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Button.Flyout>
+                            <Flyout Placement="Right">
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Background" Value="#6F000000"/>
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <RelativePanel>
+                                    <ColorPicker x:Name="CrossColorPicker" Color="{Binding CrossColor, Mode=TwoWay}" ColorSpectrumShape="Ring" IsAlphaEnabled="True" IsColorPreviewVisible="False" IsHexInputVisible="True" IsColorChannelTextInputVisible="False" IsAlphaTextInputVisible="False"/>
+                                    <Grid RelativePanel.Below="CrossColorPicker" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+                                        <Button Content="Close" Click="CrossColorPickerClose_Click" Margin="0,12,2,0" HorizontalAlignment="Stretch" CornerRadius="5"/>
+                                    </Grid>
+                                </RelativePanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    <CheckBox IsChecked="{Binding CrossVisibility, Mode=TwoWay}" Margin="10,-3,0,0" Grid.Column="1">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <TextBlock TextWrapping="Wrap" Text="Visibility" VerticalAlignment="Center" Margin="4,0,4,0"/>
                 </Grid>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
@@ -719,13 +631,15 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock TextWrapping="Wrap" Text="Rotation" Margin="4,8,0,8"/>
                     <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding CrossRotation, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="90" LargeChange="1" SmallChange="0.5" StepFrequency="0.1"/>
-                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding CrossRotation, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                    <TextBox Grid.Column="2" Text="{Binding CrossRotation, Mode=TwoWay}"/>
                 </Grid>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Height="111" Margin="19,83,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF">
-                <Grid Background="#3FFFFFFF" Height="32" Margin="0,0,0,3">
-                    <TextBlock Text="POSITION" VerticalAlignment="Center" FontSize="16" Padding="9,0,0,0"/>
-                </Grid>
+            <StackPanel HorizontalAlignment="Center" Height="107" Margin="0,67,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5">
+                <Border Style="{StaticResource TitleBorder}">
+                    <Grid>
+                        <TextBlock Text="POSITION" Style="{StaticResource TitleTextBlock}"/>
+                    </Grid>
+                </Border>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="62*"/>
@@ -747,9 +661,135 @@
                     <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Left, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
             </StackPanel>
-            <TextBox HorizontalAlignment="Left" Margin="19,21,0,0" TextWrapping="Wrap" Text="{Binding SettingsName}" VerticalAlignment="Top" Width="209"/>
+            <StackPanel HorizontalAlignment="Center" Height="180" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5" Margin="0,292,0,0">
+                <Border Style="{StaticResource TitleBorder}">
+                    <Grid>
+                        <TextBlock Text="ANGLE" Style="{StaticResource TitleTextBlock}"/>
+                    </Grid>
+                </Border>
+                <Grid Style="{StaticResource ColorItemGrid}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="190*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="AngleColorButton" Width="30" Height="30" Margin="5" BorderBrush="#FFAAAAAA" BorderThickness="2" CornerRadius="5" Padding="0" HorizontalAlignment="Right" Grid.Column="2">
+                        <Button.Flyout>
+                            <Flyout>
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Background" Value="#6F000000"/>
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <RelativePanel>
+                                    <ColorPicker x:Name="AngleColorPicker" Color="{Binding AngleColor, Mode=TwoWay}" ColorSpectrumShape="Ring" IsAlphaEnabled="True" IsColorPreviewVisible="False" IsHexInputVisible="True" IsColorChannelTextInputVisible="False" IsAlphaTextInputVisible="False"/>
+                                    <Grid RelativePanel.Below="AngleColorPicker" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+                                        <Button Content="Close" Click="AngleColorPickerClose_Click" Margin="0,12,2,0" HorizontalAlignment="Stretch" CornerRadius="5"/>
+                                    </Grid>
+                                </RelativePanel>
+                            </Flyout>
+                        </Button.Flyout>
+                        <Rectangle x:Name="AngleColorRectangle" Width="26" Height="26">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding AngleColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <CheckBox IsChecked="{Binding AngleVisibility, Mode=TwoWay}" Margin="10,-3,0,0" Grid.Column="1">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <TextBlock TextWrapping="Wrap" Text="Visibility" VerticalAlignment="Center" Margin="4,0,4,0"/>
+                </Grid>
+                <Grid Height="35">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="190*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Thickness" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleThickness, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="10" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleThickness, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                </Grid>
+                <Grid Height="35">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="190*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Length" Margin="4,8,0,8"/>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleLength, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="50" LargeChange="1" SmallChange="0.5" Minimum="5" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleLength, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                </Grid>
+                <Grid Height="35">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="190*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding AngleAngle, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="70" LargeChange="1" SmallChange="0.5" Minimum="35" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding AngleAngle, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                    <TextBlock TextWrapping="Wrap" Text="Angle" Margin="4,8,0,8"/>
+                </Grid>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Height="104" Margin="0,182,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5" >
+                <Border Style="{StaticResource TitleBorder}">
+                    <Grid>
+                        <TextBlock Text="DOT" Style="{StaticResource TitleTextBlock}"/>
+                    </Grid>
+                </Border>
+                <Grid Height="35" Padding="0,-10,0,-10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="190*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox IsChecked="{Binding DotVisibility, Mode=TwoWay}" Margin="10,-3,0,0" Grid.Column="1">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <Button x:Name="DotColorButton" Width="30" Height="30" Margin="5" BorderBrush="#FFAAAAAA" BorderThickness="2" CornerRadius="5" Padding="0" Grid.Column="2" HorizontalAlignment="Right">
+                        <Button.Flyout>
+                            <Flyout>
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Background" Value="#6F000000"/>
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <RelativePanel>
+                                    <ColorPicker x:Name="DotColorPicker" Color="{Binding DotColor, Mode=TwoWay}" ColorSpectrumShape="Ring" IsAlphaEnabled="True" IsColorPreviewVisible="False" IsHexInputVisible="True" IsColorChannelTextInputVisible="False" IsAlphaTextInputVisible="False"/>
+                                    <Grid RelativePanel.Below="DotColorPicker" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+                                        <Button Content="Close" Click="DotColorPickerClose_Click" Margin="0,12,2,0" HorizontalAlignment="Stretch" CornerRadius="5"/>
+                                    </Grid>
+                                </RelativePanel>
+                            </Flyout>
+                        </Button.Flyout>
+                        <Rectangle x:Name="DotColorRectangle" Width="26" Height="26" >
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding DotColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <TextBlock TextWrapping="Wrap" Text="Visibility" VerticalAlignment="Center" Margin="4"/>
+                </Grid>
+                <Grid Height="35">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="190*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" Value="{Binding DotDiameter, Mode=TwoWay}" Grid.Column="1" Height="32" Maximum="20" LargeChange="1" SmallChange="0.5" Minimum="1" StepFrequency="0.1"/>
+                    <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DotDiameter, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
+                    <TextBlock TextWrapping="Wrap" Text="Diameter" Margin="4,8,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
         </Grid>
-        <Grid HorizontalAlignment="Center" Height="99" Margin="0,14,0,0" VerticalAlignment="Top" Width="603" Background="#33000000" Visibility="{Binding GameBarState}">
+        <Grid HorizontalAlignment="Left" Height="99" Margin="0,28,0,0" VerticalAlignment="Top" Width="603" Background="#33000000" Visibility="{Binding GameBarState}">
+
             <Button x:Name="SetDefault_button" Content="Set Default" Margin="91,7,0,0" VerticalAlignment="Top" Click="SetDefault_button_Click"/>
             <ComboBox Margin="54,58,0,0" Width="198" ItemsSource="{Binding SettingsList.List}" SelectedIndex="{Binding SettingsListIndex}">
                 <ComboBox.ItemTemplate>
@@ -761,6 +801,7 @@
             <TextBox HorizontalAlignment="Left" Margin="351,7,0,0" TextWrapping="Wrap" Text="{Binding NewSettingName}" VerticalAlignment="Top" Width="173"/>
             <Button x:Name="New_button" Content="New" Margin="529,7,0,0" VerticalAlignment="Top" Click="New_button_Click"/>
             <Button x:Name="Delete_button" Content="Delete" Margin="351,53,0,0" VerticalAlignment="Top" Click="Delete_button_Click"/>
+            <TextBox HorizontalAlignment="Left" Margin="394,57,0,0" TextWrapping="Wrap" Text="{Binding SettingsName}" VerticalAlignment="Top" Width="209"/>
         </Grid>
     </Grid>
 </Page>

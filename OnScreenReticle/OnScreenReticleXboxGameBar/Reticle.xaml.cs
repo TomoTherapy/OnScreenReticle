@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -62,11 +63,7 @@ namespace OnScreenReticleXboxGameBar
 
         // Dot
         public double DotDiameter { get => settings.DotDiameter; set { settings.DotDiameter = value; NotifyPropertyChanged(); } }
-        public int DotColorA { get => settings.DotColorA; set { settings.DotColorA = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(DotColorString)); } }
-        public int DotColorR { get => settings.DotColorR; set { settings.DotColorR = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(DotColorString)); } }
-        public int DotColorG { get => settings.DotColorG; set { settings.DotColorG = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(DotColorString)); } }
-        public int DotColorB { get => settings.DotColorB; set { settings.DotColorB = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(DotColorString)); } }
-        public string DotColorString { get => $"#{DotColorA:X2}{DotColorR:X2}{DotColorG:X2}{DotColorB:X2}"; }
+        public Color DotColor { get => settings.DotColor; set { settings.DotColor = value; NotifyPropertyChanged(); } }
         public bool DotVisibility { get => settings.DotVisibility; set { settings.DotVisibility = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(DotVisibilityString)); } }
         public string DotVisibilityString { get => DotVisibility ? "Visible" : "Collapsed"; }
 
@@ -74,11 +71,7 @@ namespace OnScreenReticleXboxGameBar
         public double AngleThickness { get => settings.AngleThickness; set { settings.AngleThickness = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AnglePoints)); } }
         public double AngleLength { get => settings.AngleLength; set { settings.AngleLength = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AnglePoints)); } }
         public double AngleAngle { get => settings.AngleAngle; set { settings.AngleAngle = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AnglePoints)); } }
-        public int AngleColorA { get => settings.AngleColorA; set { settings.AngleColorA = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AngleColorString)); } }
-        public int AngleColorR { get => settings.AngleColorR; set { settings.AngleColorR = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AngleColorString)); } }
-        public int AngleColorG { get => settings.AngleColorG; set { settings.AngleColorG = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AngleColorString)); } }
-        public int AngleColorB { get => settings.AngleColorB; set { settings.AngleColorB = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AngleColorString)); } }
-        public string AngleColorString { get => $"#{AngleColorA:X2}{AngleColorR:X2}{AngleColorG:X2}{AngleColorB:X2}"; }
+        public Color AngleColor { get => settings.AngleColor; set { settings.AngleColor = value; NotifyPropertyChanged(); } }
         public bool AngleVisibility { get => settings.AngleVisibility; set { settings.AngleVisibility = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AngleVisibilityString)); } }
         public string AngleVisibilityString { get => AngleVisibility ? "Visible" : "Collapsed"; }
         public string AnglePoints { get => $"0,0 {AngleLength},0 {AngleLength - AngleThickness * (90 - (double)AngleAngle) / 45 * (AngleAngle < 45 ? (1 + (45 - AngleAngle) * 0.02) : (1 + (45 - AngleAngle) * 0.008))},{AngleThickness} {AngleThickness - AngleThickness * (55 - (double)AngleAngle) / 45},{AngleThickness}"; }
@@ -89,11 +82,7 @@ namespace OnScreenReticleXboxGameBar
         public double CrossOffset { get => settings.CrossOffset; set { settings.CrossOffset = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(CrossOffsetString)); } }
         public string CrossOffsetString { get => $"0,{CrossOffset},0,0"; }
         public double CrossRotation { get => settings.CrossRotation; set { settings.CrossRotation = value; NotifyPropertyChanged(); } }
-        public int CrossColorA { get => settings.CrossColorA; set { settings.CrossColorA = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(CrossColorString)); } }
-        public int CrossColorR { get => settings.CrossColorR; set { settings.CrossColorR = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(CrossColorString)); } }
-        public int CrossColorG { get => settings.CrossColorG; set { settings.CrossColorG = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(CrossColorString)); } }
-        public int CrossColorB { get => settings.CrossColorB; set { settings.CrossColorB = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(CrossColorString)); } }
-        public string CrossColorString { get => $"#{CrossColorA:X2}{CrossColorR:X2}{CrossColorG:X2}{CrossColorB:X2}"; }
+        public Color CrossColor { get => settings.CrossColor; set { settings.CrossColor = value; NotifyPropertyChanged(); } }
         public bool CrossVisibility { get => settings.CrossVisibility; set { settings.CrossVisibility = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(CrossVisibilityString)); } }
         public string CrossVisibilityString { get => CrossVisibility ? "Visible" : "Collapsed"; }
 
@@ -137,21 +126,26 @@ namespace OnScreenReticleXboxGameBar
 
         public void NotifyGameBarDisplayModeChanged(XboxGameBarWidget sender, object args)
         {
-            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => { 
+            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
                 NotifyPropertyChanged(nameof(GameBarState));
             });
+
+            ((App)Application.Current).JsonParser.SerializeSettings();
         }
 
         public void NotifyClickThroughEnabledChanged(XboxGameBarWidget sender, object args)
         {
-            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
+            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
                 NotifyPropertyChanged(nameof(ClickThroughEnabled));
             });
         }
 
         public void NotifyPinnedChanged(XboxGameBarWidget sender, object args)
         {
-            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
+            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
                 NotifyPropertyChanged(nameof(Pinned));
             });
         }
@@ -187,14 +181,13 @@ namespace OnScreenReticleXboxGameBar
 
         public void NotifyAllProperties()
         {
-            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
+            var ignore = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
                 NotifyPropertyChanged(nameof(MarginString));
 
                 NotifyPropertyChanged(nameof(DotDiameter));
-                NotifyPropertyChanged(nameof(DotColorString));
                 NotifyPropertyChanged(nameof(DotVisibilityString));
 
-                NotifyPropertyChanged(nameof(AngleColorString));
                 NotifyPropertyChanged(nameof(AngleVisibilityString));
                 NotifyPropertyChanged(nameof(AnglePoints));
 
@@ -202,9 +195,24 @@ namespace OnScreenReticleXboxGameBar
                 NotifyPropertyChanged(nameof(CrossLength));
                 NotifyPropertyChanged(nameof(CrossOffsetString));
                 NotifyPropertyChanged(nameof(CrossRotation));
-                NotifyPropertyChanged(nameof(CrossColorString));
                 NotifyPropertyChanged(nameof(CrossVisibilityString));
             });
+        }
+
+
+        private void DotColorPickerClose_Click(object sender, RoutedEventArgs e)
+        {
+            DotColorButton.Flyout.Hide();
+        }
+
+        private void AngleColorPickerClose_Click(object sender, RoutedEventArgs e)
+        {
+            AngleColorButton.Flyout.Hide();
+        }
+
+        private void CrossColorPickerClose_Click(object sender, RoutedEventArgs e)
+        {
+            CrossColorButton.Flyout.Hide();
         }
     }
 }
