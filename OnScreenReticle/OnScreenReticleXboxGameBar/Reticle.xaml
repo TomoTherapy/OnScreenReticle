@@ -23,7 +23,7 @@
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Padding" Value="9,0,0,0"/>
         </Style>
-        
+
         <Style TargetType="FlyoutPresenter">
             <Setter Property="Background" Value="#6F000000"/>
             <Setter Property="CornerRadius" Value="8"/>
@@ -634,7 +634,7 @@
                     <TextBox Grid.Column="2" Text="{Binding CrossRotation, Mode=TwoWay}"/>
                 </Grid>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" Height="107" Margin="0,67,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5">
+            <StackPanel HorizontalAlignment="Center" Height="107" Margin="0,72,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5">
                 <Border Style="{StaticResource TitleBorder}">
                     <Grid>
                         <TextBlock Text="POSITION" Style="{StaticResource TitleTextBlock}"/>
@@ -661,7 +661,7 @@
                     <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Left, Mode=TwoWay}" VerticalAlignment="Center" Height="32" Width="64"/>
                 </Grid>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" Height="180" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5" Margin="0,292,0,0">
+            <StackPanel HorizontalAlignment="Center" Height="175" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5" Margin="0,296,0,0">
                 <Border Style="{StaticResource TitleBorder}">
                     <Grid>
                         <TextBlock Text="ANGLE" Style="{StaticResource TitleTextBlock}"/>
@@ -734,7 +734,7 @@
                     <TextBlock TextWrapping="Wrap" Text="Angle" Margin="4,8,0,8"/>
                 </Grid>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" Height="104" Margin="0,182,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5" >
+            <StackPanel HorizontalAlignment="Center" Height="104" Margin="0,185,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5" >
                 <Border Style="{StaticResource TitleBorder}">
                     <Grid>
                         <TextBlock Text="DOT" Style="{StaticResource TitleTextBlock}"/>
