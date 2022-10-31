@@ -29,7 +29,7 @@ namespace OnScreenReticleXboxGameBar
 
             serializer = new JsonSerializer();
             DeserializeSettings();
-            autoResetEvent.WaitOne(500);
+            autoResetEvent.WaitOne(1000);
         }
 
         public async void SerializeSettings()
@@ -58,6 +58,7 @@ namespace OnScreenReticleXboxGameBar
                 settingsList.List.Add(new Settings() { Name = "Model 1" });
             }
 
+            Thread.Sleep(60);
             autoResetEvent.Set();
         }
     }
@@ -78,9 +79,9 @@ namespace OnScreenReticleXboxGameBar
         public Settings()
         {
             Name = "no name";
-
             Top = 300;
             Left = 125;
+            ThemeColor = new Color() { A = 0xB2, R = 0, G = 0xFF, B = 0xBF };
 
             DotDiameter = 6;
             DotColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
@@ -100,10 +101,11 @@ namespace OnScreenReticleXboxGameBar
             CrossVisibility = true; 
         }
 
+        // General
         public string Name { get; set; }
-
         public double Top { get; set; }
         public double Left { get; set; }
+        public Color ThemeColor { get; set; }
 
         // Dot
         public double DotDiameter { get; set; }

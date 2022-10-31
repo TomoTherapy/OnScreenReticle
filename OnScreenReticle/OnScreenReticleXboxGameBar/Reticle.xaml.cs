@@ -56,6 +56,8 @@ namespace OnScreenReticleXboxGameBar
         }
         public string NewSettingName { get => newSettingName; set { newSettingName = value; NotifyPropertyChanged(); } }
 
+        public Color ThemeColor { get => settings.ThemeColor; set { settings.ThemeColor = value; NotifyPropertyChanged(); } }
+
         // Location
         public double Top { get => settings.Top - 300; set { settings.Top = value + 300; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(MarginString)); } }
         public double Left { get => settings.Left - 125; set { settings.Left = value + 125; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(MarginString)); } }
@@ -213,6 +215,11 @@ namespace OnScreenReticleXboxGameBar
         private void CrossColorPickerClose_Click(object sender, RoutedEventArgs e)
         {
             CrossColorButton.Flyout.Hide();
+        }
+
+        private void ThemeColorPickerClose_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeColorButton.Flyout.Hide();
         }
     }
 }
