@@ -896,7 +896,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Grid Height="32" VerticalAlignment="Top">
-                                <Rectangle x:Name="NormalRectangle" Fill="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}" Height="20" Stroke="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}" StrokeThickness="{ThemeResource CheckBoxBorderThemeThickness}" UseLayoutRounding="False" Width="20"/>
+                                <Rectangle x:Name="NormalRectangle" Fill="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}" Height="20" Stroke="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}" StrokeThickness="{ThemeResource CheckBoxBorderThemeThickness}" Width="20"/>
                                 <FontIcon x:Name="CheckGlyph" Foreground="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="20" Glyph="&#xE001;" Opacity="0"/>
                             </Grid>
                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Grid.Column="1" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -908,7 +908,7 @@
     </Page.Resources>
     <Grid>
         <Grid Width="350" Height="700">
-            <Grid x:Name="Reticle_grid" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="{Binding MarginString}">
+            <Grid x:Name="Reticle_grid" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="{Binding MarginString}" UseLayoutRounding="False">
                 <Ellipse Width="{Binding DotDiameter}" Height="{Binding DotDiameter}" Visibility="{Binding DotVisibilityString}" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse.Fill>
                         <SolidColorBrush Color="{Binding DotColor}"/>
@@ -950,7 +950,7 @@
                     </Grid>
                     <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top">
                         <Grid.RenderTransform>
-                            <CompositeTransform Rotation="0" ScaleY="-1"/>
+                            <CompositeTransform Rotation="180"/>
                         </Grid.RenderTransform>
                         <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
                             <Rectangle.Fill>
@@ -968,9 +968,9 @@
                             </Rectangle.Fill>
                         </Rectangle>
                     </Grid>
-                    <Grid Width="100" Height="50" Margin="0,50,0,0" RenderTransformOrigin="0.75,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                    <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.75,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Grid.RenderTransform>
-                            <CompositeTransform Rotation="90" ScaleY="-1"/>
+                            <CompositeTransform Rotation="-90"/>
                         </Grid.RenderTransform>
                         <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
                             <Rectangle.Fill>
@@ -981,28 +981,139 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Button x:Name="Center_button" Content="Center" Margin="10,10,0,0" VerticalAlignment="Top" Click="Center_button_Click" Visibility="{Binding GameBarState}" Style="{StaticResource ForCommonButton}"/>
-        <TextBlock Text="Pin me!" Visibility="{Binding Pinned}" FontSize="16" HorizontalAlignment="Right" Margin="0,37,79,0" VerticalAlignment="Top" Foreground="White"/>
-        <Image HorizontalAlignment="Right" Height="38" Margin="0,12,32,0" VerticalAlignment="Top" Width="46" Source="/Assets/white-brushed-arrow-short.png" RenderTransformOrigin="0.5,0.5" Visibility="{Binding Pinned}" Stretch="Uniform" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Image.RenderTransform>
-                <CompositeTransform Rotation="-90"/>
-            </Image.RenderTransform>
-        </Image>
         <Image HorizontalAlignment="Center" Height="204" Margin="0,24,0,0" VerticalAlignment="Center" Width="270" Source="/Assets/EnableClickThrough.png" Visibility="{Binding ClickThroughEnabled}" Stretch="None"/>
-        <Grid HorizontalAlignment="Left" Height="573" Margin="-1,127,0,0" VerticalAlignment="Top" Width="361" Background="#33000000" Visibility="{Binding GameBarState}">
-            <controls:DataGrid Width="300" Height="400" ItemsSource="{Binding SettingsList.List}" AutoGenerateColumns="False">
+        <Grid HorizontalAlignment="Left" Height="700" Margin="0,0,0,0" VerticalAlignment="Center" Width="350" Background="#33000000" Visibility="{Binding GameBarState}">
+            <controls:DataGrid Name="ReticleList_dataGrid" Width="310" ItemsSource="{Binding SettingsList.List, Mode=TwoWay}" SelectedIndex="{Binding SettingsListIndex, Mode=TwoWay}" AutoGenerateColumns="False" Margin="0,81,0,20" HeadersVisibility="None" HorizontalAlignment="Center">
                 <controls:DataGrid.Columns>
-                    <controls:DataGridTemplateColumn Header="Jesus" Width="*">
+                    <controls:DataGridTemplateColumn>
                         <controls:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                
+                                <Grid Width="300">
+                                    <Button Content="×" VerticalAlignment="Center" HorizontalAlignment="Left" Width="30" Height="30">
+                                        <Button.Flyout>
+                                            <Flyout>
+                                                <Flyout.FlyoutPresenterStyle>
+                                                    <Style TargetType="FlyoutPresenter">
+                                                        <Setter Property="Background" Value="#6F000000"/>
+                                                        <Setter Property="CornerRadius" Value="8"/>
+                                                    </Style>
+                                                </Flyout.FlyoutPresenterStyle>
+                                                <RelativePanel>
+                                                    <TextBlock Text="Delete?" RelativePanel.AlignTopWithPanel="True" Name="top_textBlock" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                                                    <RelativePanel RelativePanel.Below="top_textBlock">
+                                                        <Button Content="OK" Name="OK_button" RelativePanel.AlignLeftWithPanel="True" Style="{StaticResource ForFlyout}"/>
+                                                        <Button RelativePanel.RightOf="OK_button" Style="{StaticResource ForFlyout}"/>
+                                                    </RelativePanel>
+                                                </RelativePanel>
+                                            </Flyout>
+                                        </Button.Flyout>
+                                    </Button>
+                                    <TextBox Text="{Binding Path=Name, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="30,0,0,0"/>
+                                    <Grid x:Name="Reticle_grid" Height="100" Width="100" VerticalAlignment="Center" HorizontalAlignment="Right" UseLayoutRounding="False" Margin="0,0,15,0">
+                                        <Ellipse Width="{Binding DotDiameter}" Height="{Binding DotDiameter}" Visibility="{Binding DotVisibilityString}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Ellipse.Fill>
+                                                <SolidColorBrush Color="{Binding DotColor}"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0">
+                                            <Grid.RenderTransform>
+                                                <CompositeTransform ScaleX="-1"/>
+                                            </Grid.RenderTransform>
+                                            <Polygon Points="{Binding AnglePoints}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" Visibility="{Binding AngleVisibilityString}">
+                                                <Polygon.Fill>
+                                                    <SolidColorBrush Color="{Binding AngleColor}"/>
+                                                </Polygon.Fill>
+                                                <Polygon.RenderTransform>
+                                                    <CompositeTransform Rotation="{Binding AngleAngle}"/>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
+                                        </Grid>
+                                        <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                                            <Polygon Points="{Binding AnglePoints}" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0,0" Visibility="{Binding AngleVisibilityString}">
+                                                <Polygon.Fill>
+                                                    <SolidColorBrush Color="{Binding AngleColor}"/>
+                                                </Polygon.Fill>
+                                                <Polygon.RenderTransform>
+                                                    <CompositeTransform Rotation="{Binding AngleAngle}"/>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
+                                        </Grid>
+                                        <Grid RenderTransformOrigin="0.5,0.5">
+                                            <Grid.RenderTransform>
+                                                <CompositeTransform Rotation="{Binding CrossRotation}"/>
+                                            </Grid.RenderTransform>
+                                            <Grid Width="100" Height="50" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
+                                                    <Rectangle.Fill>
+                                                        <SolidColorBrush Color="{Binding CrossColor}"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+                                            <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                <Grid.RenderTransform>
+                                                    <CompositeTransform Rotation="180"/>
+                                                </Grid.RenderTransform>
+                                                <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
+                                                    <Rectangle.Fill>
+                                                        <SolidColorBrush Color="{Binding CrossColor}"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+                                            <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.25,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                <Grid.RenderTransform>
+                                                    <CompositeTransform Rotation="90"/>
+                                                </Grid.RenderTransform>
+                                                <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
+                                                    <Rectangle.Fill>
+                                                        <SolidColorBrush Color="{Binding CrossColor}"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+                                            <Grid Width="100" Height="50" Margin="0,0,0,0" RenderTransformOrigin="0.75,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                <Grid.RenderTransform>
+                                                    <CompositeTransform Rotation="-90"/>
+                                                </Grid.RenderTransform>
+                                                <Rectangle Width="{Binding CrossThickness}" Height="{Binding CrossLength}" Margin="{Binding CrossOffsetString}" Visibility="{Binding CrossVisibilityString}" VerticalAlignment="Top">
+                                                    <Rectangle.Fill>
+                                                        <SolidColorBrush Color="{Binding CrossColor}"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </DataTemplate>
                         </controls:DataGridTemplateColumn.CellTemplate>
                     </controls:DataGridTemplateColumn>
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
+            <Button x:Name="ThemeColorButton" Style="{StaticResource ForColorPicker}" Margin="0,27,132,0" VerticalAlignment="Top">
+                <Button.Flyout>
+                    <Flyout>
+                        <Flyout.FlyoutPresenterStyle>
+                            <Style TargetType="FlyoutPresenter">
+                                <Setter Property="Background" Value="#6F000000"/>
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Flyout.FlyoutPresenterStyle>
+                        <RelativePanel>
+                            <ColorPicker x:Name="ThemeColorPicker" Color="{Binding ThemeColor, Mode=TwoWay}" ColorSpectrumShape="Ring" IsAlphaEnabled="True" IsColorPreviewVisible="False" IsHexInputVisible="True" IsColorChannelTextInputVisible="False" IsAlphaTextInputVisible="False"/>
+                            <Grid RelativePanel.Below="ThemeColorPicker" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+                                <Button Click="ThemeColorPickerClose_Click" Style="{StaticResource ForFlyout}"/>
+                            </Grid>
+                        </RelativePanel>
+                    </Flyout>
+                </Button.Flyout>
+                <Rectangle x:Name="DotColorRectangle1" Width="26" Height="26" >
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{Binding ThemeColor}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button x:Name="SetDefault_button" Content="Set Default" Margin="92,26,0,0" VerticalAlignment="Top" Click="SetDefault_button_Click" Style="{StaticResource ForCommonButton}"/>
+            <Button x:Name="New_button" Content="New" Margin="257,26,0,0" VerticalAlignment="Top" Click="New_button_Click" Style="{StaticResource ForCommonButton}"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="700" Margin="640,0,0,0" VerticalAlignment="Center" Width="360" Background="#33000000" Visibility="{Binding GameBarState}" CornerRadius="5">
+        <Grid HorizontalAlignment="Right" Height="700" Margin="640,0,0,0" VerticalAlignment="Center" Width="350" Background="#33000000" Visibility="{Binding GameBarState}" CornerRadius="5">
             <StackPanel HorizontalAlignment="Center" Height="211" Margin="0,479,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5">
                 <Border Style="{StaticResource TitleBorder}">
                     <Grid>
@@ -1239,44 +1350,13 @@
                     <TextBlock Text="Diameter" Style="{StaticResource ItemTextBlock}"/>
                 </Grid>
             </StackPanel>
-        </Grid>
-        <Grid HorizontalAlignment="Left" Height="99" Margin="0,28,0,0" VerticalAlignment="Top" Width="603" Background="#33000000" Visibility="{Binding GameBarState}">
-
-            <Button x:Name="SetDefault_button" Content="Set Default" Margin="91,7,0,0" VerticalAlignment="Top" Click="SetDefault_button_Click" Style="{StaticResource ForCommonButton}"/>
-            <ComboBox Margin="54,58,0,0" Width="198" ItemsSource="{Binding SettingsList.List}" SelectedIndex="{Binding SettingsListIndex}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TextBox HorizontalAlignment="Left" Margin="351,7,0,0" Text="{Binding NewSettingName}" VerticalAlignment="Top" Width="173"/>
-            <Button x:Name="New_button" Content="New" Margin="529,7,0,0" VerticalAlignment="Top" Click="New_button_Click" Style="{StaticResource ForCommonButton}"/>
-            <Button x:Name="Delete_button" Content="Delete" Margin="351,53,0,0" VerticalAlignment="Top" Click="Delete_button_Click" Style="{StaticResource ForCommonButton}"/>
-            <TextBox HorizontalAlignment="Left" Margin="394,57,0,0" Text="{Binding SettingsName}" VerticalAlignment="Top" Width="209"/>
-            <Button x:Name="ThemeColorButton" Style="{StaticResource ForColorPicker}" Margin="0,10,374,0" VerticalAlignment="Top">
-                <Button.Flyout>
-                    <Flyout>
-                        <Flyout.FlyoutPresenterStyle>
-                            <Style TargetType="FlyoutPresenter">
-                                <Setter Property="Background" Value="#6F000000"/>
-                                <Setter Property="CornerRadius" Value="8"/>
-                            </Style>
-                        </Flyout.FlyoutPresenterStyle>
-                        <RelativePanel>
-                            <ColorPicker x:Name="ThemeColorPicker" Color="{Binding ThemeColor, Mode=TwoWay}" ColorSpectrumShape="Ring" IsAlphaEnabled="True" IsColorPreviewVisible="False" IsHexInputVisible="True" IsColorChannelTextInputVisible="False" IsAlphaTextInputVisible="False"/>
-                            <Grid RelativePanel.Below="ThemeColorPicker" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
-                                <Button Click="ThemeColorPickerClose_Click" Style="{StaticResource ForFlyout}"/>
-                            </Grid>
-                        </RelativePanel>
-                    </Flyout>
-                </Button.Flyout>
-                <Rectangle x:Name="DotColorRectangle1" Width="26" Height="26" >
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="{Binding ThemeColor}"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
+            <TextBlock Text="Pin me!" Visibility="{Binding Pinned}" FontSize="16" HorizontalAlignment="Right" Margin="0,28,76,0" VerticalAlignment="Top" Foreground="White"/>
+            <Image HorizontalAlignment="Right" Height="40" Margin="0,5,35,0" VerticalAlignment="Top" Width="34" Source="/Assets/arrow-white.png" RenderTransformOrigin="0.5,0.5" Visibility="{Binding Pinned}" Stretch="Fill" UseLayoutRounding="False">
+                <Image.RenderTransform>
+                    <CompositeTransform Rotation="-90"/>
+                </Image.RenderTransform>
+            </Image>
+            <Button x:Name="Center_button" Content="Center" Margin="10,10,0,0" VerticalAlignment="Top" Click="Center_button_Click" Visibility="{Binding GameBarState}" Style="{StaticResource ForCommonButton}"/>
         </Grid>
     </Grid>
 </Page>

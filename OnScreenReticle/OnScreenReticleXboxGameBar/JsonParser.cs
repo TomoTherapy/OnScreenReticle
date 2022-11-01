@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -74,8 +76,39 @@ namespace OnScreenReticleXboxGameBar
         }
     }
 
-    public class Settings
+    public class Settings : INotifyPropertyChanged
     {
+        // General
+        public string Name { get; set; }
+        public double Top { get; set; }
+        public double Left { get; set; }
+        public Color ThemeColor { get; set; }
+
+        // Dot
+        public double DotDiameter { get; set; }
+        public Color DotColor { get; set; }
+        public bool DotVisibility { get; set; }
+        public string DotVisibilityString { get => DotVisibility ? "Visible" : "Collapsed"; }
+
+        // Angle
+        public double AngleThickness { get; set; }
+        public double AngleLength { get; set; }
+        public double AngleAngle { get; set; }
+        public Color AngleColor { get; set; }
+        public bool AngleVisibility { get; set; }
+        public string AngleVisibilityString { get => AngleVisibility ? "Visible" : "Collapsed"; }
+        public string AnglePoints { get => $"0,0 {AngleLength},0 {AngleLength - AngleThickness * (90 - (double)AngleAngle) / 45 * (AngleAngle < 45 ? (1 + (45 - AngleAngle) * 0.02) : (1 + (45 - AngleAngle) * 0.008))},{AngleThickness} {AngleThickness - AngleThickness * (55 - (double)AngleAngle) / 45},{AngleThickness}"; }
+
+        // Cross
+        public double CrossThickness { get; set; }
+        public double CrossLength { get; set; }
+        public double CrossOffset { get; set; }
+        public double CrossRotation { get; set; }
+        public Color CrossColor { get; set; }
+        public bool CrossVisibility { get; set; }
+        public string CrossVisibilityString { get => CrossVisibility ? "Visible" : "Collapsed"; }
+        public string CrossOffsetString { get => $"0,{CrossOffset},0,0"; }
+
         public Settings()
         {
             Name = "no name";
@@ -98,33 +131,32 @@ namespace OnScreenReticleXboxGameBar
             CrossOffset = 10;
             CrossRotation = 0;
             CrossColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
-            CrossVisibility = true; 
+            CrossVisibility = true;
         }
 
-        // General
-        public string Name { get; set; }
-        public double Top { get; set; }
-        public double Left { get; set; }
-        public Color ThemeColor { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
-        // Dot
-        public double DotDiameter { get; set; }
-        public Color DotColor { get; set; }
-        public bool DotVisibility { get; set; }
+        public void NotifyAllProperties()
+        {
+            NotifyPropertyChanged(nameof(DotDiameter));
+            NotifyPropertyChanged(nameof(DotColor));
+            NotifyPropertyChanged(nameof(DotVisibilityString));
 
-        // Angle
-        public double AngleThickness { get; set; }
-        public double AngleLength { get; set; }
-        public double AngleAngle { get; set; }
-        public Color AngleColor { get; set; }
-        public bool AngleVisibility { get; set; }
+            NotifyPropertyChanged(nameof(AngleAngle));
+            NotifyPropertyChanged(nameof(AngleColor));
+            NotifyPropertyChanged(nameof(AngleVisibilityString));
+            NotifyPropertyChanged(nameof(AnglePoints));
 
-        // Cross
-        public double CrossThickness { get; set; }
-        public double CrossLength { get; set; }
-        public double CrossOffset { get; set; }
-        public double CrossRotation { get; set; }
-        public Color CrossColor { get; set; }
-        public bool CrossVisibility { get; set; }
+            NotifyPropertyChanged(nameof(CrossThickness));
+            NotifyPropertyChanged(nameof(CrossLength));
+            NotifyPropertyChanged(nameof(CrossRotation));
+            NotifyPropertyChanged(nameof(CrossColor));
+            NotifyPropertyChanged(nameof(CrossVisibilityString));
+            NotifyPropertyChanged(nameof(CrossOffsetString));
+        }
     }
 }
