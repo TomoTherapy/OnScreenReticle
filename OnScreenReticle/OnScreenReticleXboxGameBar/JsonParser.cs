@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace OnScreenReticleXboxGameBar
 {
     public class JsonParser
     {
+        private object obj = new object();
+
         private SettingsList settingsList;
         private JsonSerializer serializer;
         private Windows.Storage.StorageFolder installedLocation;
@@ -36,11 +39,18 @@ namespace OnScreenReticleXboxGameBar
 
         public async void SerializeSettings()
         {
-            // Create sample file; replace if exists.
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            StorageFile jsonFile = await storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting);
+            try
+            {
+                // Create sample file; replace if exists.
+                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+                StorageFile jsonFile = await storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting);
 
-            await FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList));
+                await FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList));
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         public async void DeserializeSettings()
@@ -68,11 +78,11 @@ namespace OnScreenReticleXboxGameBar
     public class SettingsList
     {
         public int ChosenOne { get; set; }
-        public List<Settings> List { get; set; }
+        public ObservableCollection<Settings> List { get; set; }
 
         public SettingsList()
         {
-            List = new List<Settings>();
+            List = new ObservableCollection<Settings>();
         }
     }
 
@@ -122,7 +132,7 @@ namespace OnScreenReticleXboxGameBar
 
             AngleThickness = 3;
             AngleLength = 13;
-            AngleAngle = 50;//35~70
+            AngleAngle = 50;
             AngleColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
             AngleVisibility = true;
 

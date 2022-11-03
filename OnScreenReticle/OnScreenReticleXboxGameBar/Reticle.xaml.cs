@@ -1,6 +1,7 @@
 ﻿using Microsoft.Gaming.XboxGameBar;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -39,18 +40,18 @@ namespace OnScreenReticleXboxGameBar
         private Settings settings;
         private string newSettingName;
 
-        public SettingsList SettingsList { get => ((App)Application.Current).SettingsList; set => ((App)Application.Current).SettingsList = value; }
+        public ObservableCollection<Settings> SettingsList { get => ((App)Application.Current).SettingsList.List; set => ((App)Application.Current).SettingsList.List = value; }
         public int SettingsListIndex
         {
             get
             {
-                Settings = SettingsList.List[SettingsList.ChosenOne];
-                return SettingsList.ChosenOne;
+                Settings = SettingsList[((App)Application.Current).SettingsList.ChosenOne];
+                return ((App)Application.Current).SettingsList.ChosenOne;
             }
             set
             {
-                SettingsList.ChosenOne = value;
-                Settings = SettingsList.List[SettingsList.ChosenOne];
+                ((App)Application.Current).SettingsList.ChosenOne = value;
+                Settings = SettingsList[((App)Application.Current).SettingsList.ChosenOne];
                 NotifyAllProperties();
             }
         }
@@ -169,12 +170,16 @@ namespace OnScreenReticleXboxGameBar
 
         private void New_button_Click(object sender, RoutedEventArgs e)
         {
-
+            SettingsList.Add(new Settings());
         }
 
         private void Delete_button_Click(object sender, RoutedEventArgs e)
         {
+            if (SettingsList.Count == 1) return;
 
+            int index = SettingsListIndex;
+            if (SettingsListIndex > 0) SettingsListIndex--;
+            SettingsList.RemoveAt(index);
         }
 
         private void SetDefault_button_Click(object sender, RoutedEventArgs e)
@@ -199,6 +204,26 @@ namespace OnScreenReticleXboxGameBar
             CrossRotation = 0;
             CrossColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
             CrossVisibility = true;
+        }
+
+        private void DotColorPickerClose_Click(object sender, RoutedEventArgs e)
+        {
+            DotColorButton.Flyout.Hide();
+        }
+
+        private void AngleColorPickerClose_Click(object sender, RoutedEventArgs e)
+        {
+            AngleColorButton.Flyout.Hide();
+        }
+
+        private void CrossColorPickerClose_Click(object sender, RoutedEventArgs e)
+        {
+            CrossColorButton.Flyout.Hide();
+        }
+
+        private void ThemeColorPickerClose_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeColorButton.Flyout.Hide();
         }
 
         public void NotifyAllProperties()
@@ -227,27 +252,6 @@ namespace OnScreenReticleXboxGameBar
                 NotifyPropertyChanged(nameof(CrossVisibility));
                 NotifyPropertyChanged(nameof(CrossVisibilityString));
             });
-        }
-
-
-        private void DotColorPickerClose_Click(object sender, RoutedEventArgs e)
-        {
-            DotColorButton.Flyout.Hide();
-        }
-
-        private void AngleColorPickerClose_Click(object sender, RoutedEventArgs e)
-        {
-            AngleColorButton.Flyout.Hide();
-        }
-
-        private void CrossColorPickerClose_Click(object sender, RoutedEventArgs e)
-        {
-            CrossColorButton.Flyout.Hide();
-        }
-
-        private void ThemeColorPickerClose_Click(object sender, RoutedEventArgs e)
-        {
-            ThemeColorButton.Flyout.Hide();
         }
     }
 }
