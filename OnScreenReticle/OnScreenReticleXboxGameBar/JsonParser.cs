@@ -34,24 +34,26 @@ namespace OnScreenReticleXboxGameBar
 
             serializer = new JsonSerializer();
             DeserializeSettings();
-            autoResetEvent.WaitOne(2000);
+            //autoResetEvent.WaitOne(3000);
 
             if (settingsList == null)
             {
                 settingsList = new SettingsList() { ChosenOne = 0 };
-                settingsList.List.Add(new Settings() { Name = "Model 1" });
+                settingsList.List.Add(new Settings() { Name = "no name" });
             }
         }
 
-        public async void SerializeSettings()
+        public void SerializeSettings()
         {
             try
             {
                 // Create sample file; replace if exists.
                 StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-                StorageFile jsonFile = await storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting);
+                //StorageFile jsonFile = await storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting);
+                StorageFile jsonFile = storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting).AsTask().Result;
 
-                await FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList));
+                //await FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList));
+                FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList)).AsTask();
             }
             catch (Exception)
             {
@@ -59,25 +61,38 @@ namespace OnScreenReticleXboxGameBar
             }
         }
 
-        public async void DeserializeSettings()
+        public void DeserializeSettings()
         {
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
 
             if (File.Exists(Path.Combine(storageFolder.Path, "OnScreenReticle.json")))
             {
-                StorageFile jsonFile = await storageFolder.GetFileAsync("OnScreenReticle.json");
-                string json = await FileIO.ReadTextAsync(jsonFile);
+                //StorageFile jsonFile = await storageFolder.GetFileAsync("OnScreenReticle.json");
+                StorageFile jsonFile = storageFolder.GetFileAsync("OnScreenReticle.json").AsTask().Result;
+
+                //var buffer = await FileIO.ReadBufferAsync(jsonFile);
+                //using (var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(buffer))
+                //{
+                //    string json = dataReader.ReadString(buffer.Length);
+                //    settingsList = JsonConvert.DeserializeObject<SettingsList>(json);
+                //}
+
+                //string json = await FileIO.ReadTextAsync(jsonFile);
+                string json = FileIO.ReadTextAsync(jsonFile).AsTask().Result;
                 settingsList = JsonConvert.DeserializeObject<SettingsList>(json);
+
+
             }
 
             if (settingsList == null)
             {
                 settingsList = new SettingsList() { ChosenOne = 0 };
-                settingsList.List.Add(new Settings() { Name = "Model 1" });
+                settingsList.List.Add(new Settings() { Name = "Center dot", AngleVisibility = false, CrossVisibility = false });
+                settingsList.List.Add(new Settings() { Name = "Center dot,cross", AngleVisibility = false });
+                settingsList.List.Add(new Settings() { Name = "Center angle", DotVisibility = false, CrossVisibility = false });
             }
 
-            Thread.Sleep(60);
-            autoResetEvent.Set();
+            //autoResetEvent.Set();
         }
     }
 

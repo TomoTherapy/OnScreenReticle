@@ -253,5 +253,10 @@ namespace OnScreenReticleXboxGameBar
                 NotifyPropertyChanged(nameof(CrossVisibilityString));
             });
         }
+
+        private void ReticleList_dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
     }
 }

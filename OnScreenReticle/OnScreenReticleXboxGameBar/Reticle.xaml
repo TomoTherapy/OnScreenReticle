@@ -986,7 +986,7 @@
             <Image Source="/Assets/enable_click_through.png" Stretch="None"/>
         </StackPanel>
         <Grid HorizontalAlignment="Left" Height="700" Margin="0,0,0,0" VerticalAlignment="Center" Width="350" Background="#33000000" Visibility="{Binding GameBarState}">
-            <controls:DataGrid Name="ReticleList_dataGrid" Width="310" ItemsSource="{Binding SettingsList, Mode=TwoWay}" SelectedIndex="{Binding SettingsListIndex, Mode=TwoWay}" AutoGenerateColumns="False" Margin="0,81,0,20" HeadersVisibility="None" HorizontalAlignment="Center">
+            <controls:DataGrid Name="ReticleList_dataGrid" Width="310" ItemsSource="{Binding SettingsList, Mode=TwoWay}" SelectedIndex="{Binding SettingsListIndex, Mode=TwoWay}" AutoGenerateColumns="False" Margin="0,81,0,20" HeadersVisibility="None" HorizontalAlignment="Center" SelectionChanged="ReticleList_dataGrid_SelectionChanged">
                 <controls:DataGrid.Columns>
                     <controls:DataGridTemplateColumn>
                         <controls:DataGridTemplateColumn.CellTemplate>
