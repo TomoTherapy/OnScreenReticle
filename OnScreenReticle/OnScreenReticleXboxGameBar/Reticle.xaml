@@ -981,7 +981,10 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Image HorizontalAlignment="Center" Height="204" Margin="0,24,0,0" VerticalAlignment="Center" Width="270" Source="/Assets/EnableClickThrough.png" Visibility="{Binding ClickThroughEnabled}" Stretch="None"/>
+        <StackPanel HorizontalAlignment="Center" Height="204" Margin="0,24,0,0" VerticalAlignment="Center" Width="270" Visibility="{Binding ClickThroughEnabled}" Background="#FF3C3C3C">
+            <TextBlock Text="Click &quot;Enable click-through&quot; in the top bar" HorizontalAlignment="Center" Margin="0,5,0,15"/>
+            <Image Source="/Assets/enable_click_through.png" Stretch="None"/>
+        </StackPanel>
         <Grid HorizontalAlignment="Left" Height="700" Margin="0,0,0,0" VerticalAlignment="Center" Width="350" Background="#33000000" Visibility="{Binding GameBarState}">
             <controls:DataGrid Name="ReticleList_dataGrid" Width="310" ItemsSource="{Binding SettingsList, Mode=TwoWay}" SelectedIndex="{Binding SettingsListIndex, Mode=TwoWay}" AutoGenerateColumns="False" Margin="0,81,0,20" HeadersVisibility="None" HorizontalAlignment="Center">
                 <controls:DataGrid.Columns>
@@ -1114,7 +1117,7 @@
             <Button x:Name="SetDefault_button" Content="Set Default" Margin="92,26,0,0" VerticalAlignment="Top" Click="SetDefault_button_Click" Style="{StaticResource ForCommonButton}"/>
             <Button x:Name="New_button" Content="New" Margin="257,26,0,0" VerticalAlignment="Top" Click="New_button_Click" Style="{StaticResource ForCommonButton}"/>
         </Grid>
-        <Grid HorizontalAlignment="Right" Height="700" Margin="640,0,0,0" VerticalAlignment="Center" Width="350" Background="#33000000" Visibility="{Binding GameBarState}" CornerRadius="5">
+        <Grid HorizontalAlignment="Right" Height="700" Margin="640,0,0,0" VerticalAlignment="Center" Width="350" Background="#33000000" Visibility="{Binding GameBarState}">
             <StackPanel HorizontalAlignment="Center" Height="211" Margin="0,479,0,0" VerticalAlignment="Top" Width="325" Background="#26FFFFFF" CornerRadius="5">
                 <Border Style="{StaticResource TitleBorder}">
                     <Grid>

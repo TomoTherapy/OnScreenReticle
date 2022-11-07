@@ -34,7 +34,13 @@ namespace OnScreenReticleXboxGameBar
 
             serializer = new JsonSerializer();
             DeserializeSettings();
-            autoResetEvent.WaitOne(1000);
+            autoResetEvent.WaitOne(2000);
+
+            if (settingsList == null)
+            {
+                settingsList = new SettingsList() { ChosenOne = 0 };
+                settingsList.List.Add(new Settings() { Name = "Model 1" });
+            }
         }
 
         public async void SerializeSettings()

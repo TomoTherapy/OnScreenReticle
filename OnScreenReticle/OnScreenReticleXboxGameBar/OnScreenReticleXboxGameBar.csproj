@@ -145,6 +145,7 @@
     </Content>
     <Content Include="Assets\check-white.png" />
     <Content Include="Assets\EnableClickThrough.png" />
+    <Content Include="Assets\enable_click_through.png" />
     <Content Include="Assets\white-brushed-arrow-long.png" />
     <Content Include="Assets\white-brushed-arrow-short.png" />
     <Content Include="Assets\x-white.png" />
