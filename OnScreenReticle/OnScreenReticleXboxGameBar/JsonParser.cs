@@ -17,24 +17,15 @@ namespace OnScreenReticleXboxGameBar
 {
     public class JsonParser
     {
-        private object obj = new object();
-
         private SettingsList settingsList;
-        private JsonSerializer serializer;
-        private Windows.Storage.StorageFolder installedLocation;
-        private AutoResetEvent autoResetEvent;
+        private StorageFolder storageFolder;
 
         public SettingsList SettingsList { get => settingsList; set => settingsList = value; }
 
         public JsonParser()
         {
-            autoResetEvent = new AutoResetEvent(false);
-
-            installedLocation = Windows.ApplicationModel.Package.Current.InstalledLocation;
-
-            serializer = new JsonSerializer();
+            storageFolder = ApplicationData.Current.LocalFolder;
             DeserializeSettings();
-            //autoResetEvent.WaitOne(3000);
 
             if (settingsList == null)
             {
@@ -47,12 +38,7 @@ namespace OnScreenReticleXboxGameBar
         {
             try
             {
-                // Create sample file; replace if exists.
-                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-                //StorageFile jsonFile = await storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting);
                 StorageFile jsonFile = storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting).AsTask().Result;
-
-                //await FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList));
                 FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList)).AsTask();
             }
             catch (Exception)
@@ -63,36 +49,20 @@ namespace OnScreenReticleXboxGameBar
 
         public void DeserializeSettings()
         {
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-
             if (File.Exists(Path.Combine(storageFolder.Path, "OnScreenReticle.json")))
             {
-                //StorageFile jsonFile = await storageFolder.GetFileAsync("OnScreenReticle.json");
                 StorageFile jsonFile = storageFolder.GetFileAsync("OnScreenReticle.json").AsTask().Result;
-
-                //var buffer = await FileIO.ReadBufferAsync(jsonFile);
-                //using (var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(buffer))
-                //{
-                //    string json = dataReader.ReadString(buffer.Length);
-                //    settingsList = JsonConvert.DeserializeObject<SettingsList>(json);
-                //}
-
-                //string json = await FileIO.ReadTextAsync(jsonFile);
                 string json = FileIO.ReadTextAsync(jsonFile).AsTask().Result;
                 settingsList = JsonConvert.DeserializeObject<SettingsList>(json);
-
-
             }
 
             if (settingsList == null)
             {
                 settingsList = new SettingsList() { ChosenOne = 0 };
-                settingsList.List.Add(new Settings() { Name = "Center dot", AngleVisibility = false, CrossVisibility = false });
-                settingsList.List.Add(new Settings() { Name = "Center dot,cross", AngleVisibility = false });
-                settingsList.List.Add(new Settings() { Name = "Center angle", DotVisibility = false, CrossVisibility = false });
+                settingsList.List.Add(new Settings() { Name = "Center dot", ChevronVisibility = false, CrossVisibility = false });
+                settingsList.List.Add(new Settings() { Name = "Center dot,cross", ChevronVisibility = false });
+                settingsList.List.Add(new Settings() { Name = "Center chevron", DotVisibility = false, CrossVisibility = false });
             }
-
-            //autoResetEvent.Set();
         }
     }
 
@@ -111,30 +81,30 @@ namespace OnScreenReticleXboxGameBar
     {
         // General
         public string Name { get; set; }
-        public double Top { get; set; }
-        public double Left { get; set; }
+        public double Top { get; set; }// 0~600
+        public double Left { get; set; }// 0~250
         public Color ThemeColor { get; set; }
 
         // Dot
-        public double DotDiameter { get; set; }
+        public double DotDiameter { get; set; }// 1~30
         public Color DotColor { get; set; }
         public bool DotVisibility { get; set; }
         public string DotVisibilityString { get => DotVisibility ? "Visible" : "Collapsed"; }
 
-        // Angle
-        public double AngleThickness { get; set; }
-        public double AngleLength { get; set; }
-        public double AngleAngle { get; set; }
-        public Color AngleColor { get; set; }
-        public bool AngleVisibility { get; set; }
-        public string AngleVisibilityString { get => AngleVisibility ? "Visible" : "Collapsed"; }
-        public string AnglePoints { get => $"0,0 {AngleLength},0 {AngleLength - AngleThickness * (90 - (double)AngleAngle) / 45 * (AngleAngle < 45 ? (1 + (45 - AngleAngle) * 0.02) : (1 + (45 - AngleAngle) * 0.008))},{AngleThickness} {AngleThickness - AngleThickness * (55 - (double)AngleAngle) / 45},{AngleThickness}"; }
+        // Chevron
+        public double ChevronThickness { get; set; }// 1~10
+        public double ChevronLength { get; set; }// 5~50
+        public double ChevronAngle { get; set; }// 35~70
+        public Color ChevronColor { get; set; }
+        public bool ChevronVisibility { get; set; }
+        public string ChevronVisibilityString { get => ChevronVisibility ? "Visible" : "Collapsed"; }
+        public string ChevronPoints { get => $"0,0 {ChevronLength},0 {ChevronLength - ChevronThickness * (90 - (double)ChevronAngle) / 45 * (ChevronAngle < 45 ? (1 + (45 - ChevronAngle) * 0.02) : (1 + (45 - ChevronAngle) * 0.008))},{ChevronThickness} {ChevronThickness - ChevronThickness * (55 - (double)ChevronAngle) / 45},{ChevronThickness}"; }
 
         // Cross
-        public double CrossThickness { get; set; }
-        public double CrossLength { get; set; }
-        public double CrossOffset { get; set; }
-        public double CrossRotation { get; set; }
+        public double CrossThickness { get; set; }// 1~20
+        public double CrossLength { get; set; }// 1~50
+        public double CrossOffset { get; set; }// 0~30
+        public double CrossRotation { get; set; }// 0~90
         public Color CrossColor { get; set; }
         public bool CrossVisibility { get; set; }
         public string CrossVisibilityString { get => CrossVisibility ? "Visible" : "Collapsed"; }
@@ -148,20 +118,20 @@ namespace OnScreenReticleXboxGameBar
             ThemeColor = new Color() { A = 0xB2, R = 0, G = 0xFF, B = 0xBF };
 
             DotDiameter = 6;
-            DotColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
+            DotColor = new Color() { A = 0xFF, R = 0xFA, G = 0xA, B = 0xA };
             DotVisibility = true;
 
-            AngleThickness = 3;
-            AngleLength = 13;
-            AngleAngle = 50;
-            AngleColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
-            AngleVisibility = true;
+            ChevronThickness = 3;
+            ChevronLength = 13;
+            ChevronAngle = 50;
+            ChevronColor = new Color() { A = 0xFF, R = 0xFA, G = 0xA, B = 0xA };
+            ChevronVisibility = true;
 
             CrossThickness = 3.5;
             CrossLength = 10;
             CrossOffset = 10;
             CrossRotation = 0;
-            CrossColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
+            CrossColor = new Color() { A = 255, R = 0xFA, G = 0xA, B = 0xA };
             CrossVisibility = true;
         }
 
@@ -177,10 +147,10 @@ namespace OnScreenReticleXboxGameBar
             NotifyPropertyChanged(nameof(DotColor));
             NotifyPropertyChanged(nameof(DotVisibilityString));
 
-            NotifyPropertyChanged(nameof(AngleAngle));
-            NotifyPropertyChanged(nameof(AngleColor));
-            NotifyPropertyChanged(nameof(AngleVisibilityString));
-            NotifyPropertyChanged(nameof(AnglePoints));
+            NotifyPropertyChanged(nameof(ChevronAngle));
+            NotifyPropertyChanged(nameof(ChevronColor));
+            NotifyPropertyChanged(nameof(ChevronVisibilityString));
+            NotifyPropertyChanged(nameof(ChevronPoints));
 
             NotifyPropertyChanged(nameof(CrossThickness));
             NotifyPropertyChanged(nameof(CrossLength));

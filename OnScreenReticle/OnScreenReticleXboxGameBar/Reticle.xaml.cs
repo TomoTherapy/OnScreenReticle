@@ -61,31 +61,167 @@ namespace OnScreenReticleXboxGameBar
         public Color ThemeColor { get => Settings.ThemeColor; set { Settings.ThemeColor = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
 
         // Location
-        public double Top { get => Settings.Top - 300; set { Settings.Top = value + 300; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(MarginString)); Settings.NotifyAllProperties(); } }
-        public double Left { get => Settings.Left - 125; set { Settings.Left = value + 125; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(MarginString)); Settings.NotifyAllProperties(); } }
+        public double Top
+        {
+            get => Settings.Top - 300;
+            set
+            {
+                double val = value + 300;
+                if (val < 0) val = 0;
+                if (val > 600) val = 600;
+                Settings.Top = val;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(MarginString));
+                Settings.NotifyAllProperties();
+                Top_textBox.Text = Math.Round(val - 300, 1).ToString();
+            }
+        }
+        public double Left
+        {
+            get => Settings.Left - 125;
+            set
+            {
+                double val = value + 125;
+                if (val < 0) val = 0;
+                if (val > 250) val = 250;
+                Settings.Left = val;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(MarginString));
+                Settings.NotifyAllProperties();
+                Left_textBox.Text = Math.Round(val - 125, 1).ToString();
+            }
+        }
         public string MarginString { get => $"{Left + 125},{Top + 300},0,0"; }
 
         // Dot
-        public double DotDiameter { get => Settings.DotDiameter; set { Settings.DotDiameter = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
+        public double DotDiameter
+        {
+            get => Settings.DotDiameter;
+            set
+            {
+                double val = value;
+                if (val < 1) val = 1;
+                if (val > 30) val = 30;
+                Settings.DotDiameter = val;
+                NotifyPropertyChanged();
+                Settings.NotifyAllProperties();
+                DotDiameter_textBox.Text = Math.Round(val, 1).ToString();
+            }
+        }
         public Color DotColor { get => Settings.DotColor; set { Settings.DotColor = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
         public bool DotVisibility { get => Settings.DotVisibility; set { Settings.DotVisibility = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(DotVisibilityString)); Settings.NotifyAllProperties(); } }
         public string DotVisibilityString { get => Settings.DotVisibilityString; }
 
-        // Angle
-        public double AngleThickness { get => Settings.AngleThickness; set { Settings.AngleThickness = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AnglePoints)); Settings.NotifyAllProperties(); } }
-        public double AngleLength { get => Settings.AngleLength; set { Settings.AngleLength = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AnglePoints)); Settings.NotifyAllProperties(); } }
-        public double AngleAngle { get => Settings.AngleAngle; set { Settings.AngleAngle = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AnglePoints)); Settings.NotifyAllProperties(); } }
-        public Color AngleColor { get => Settings.AngleColor; set { Settings.AngleColor = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
-        public bool AngleVisibility { get => Settings.AngleVisibility; set { Settings.AngleVisibility = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(AngleVisibilityString)); Settings.NotifyAllProperties(); } }
-        public string AngleVisibilityString { get => Settings.AngleVisibilityString; }
-        public string AnglePoints { get => Settings.AnglePoints; }
+        // Chevron
+        public double ChevronThickness
+        {
+            get => Settings.ChevronThickness;
+            set
+            {
+                double val = value;
+                if (val < 1) val = 1;
+                if (val > 10) val = 10;
+                Settings.ChevronThickness = val;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(ChevronPoints));
+                Settings.NotifyAllProperties();
+                ChevronThickness_textBox.Text = Math.Round(val, 1).ToString();
+            }
+        }
+        public double ChevronLength
+        {
+            get => Settings.ChevronLength;
+            set
+            {
+                double val = value;
+                if (val < 5) val = 5;
+                if (val > 50) val = 50;
+                Settings.ChevronLength = val;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(ChevronPoints));
+                Settings.NotifyAllProperties();
+                ChevronLength_textBox.Text = Math.Round(val, 1).ToString();
+            }
+        }
+        public double ChevronAngle
+        {
+            get => Settings.ChevronAngle;
+            set
+            {
+                double val = value;
+                if (val < 35) val = 35;
+                if (val > 70) val = 70;
+                Settings.ChevronAngle = val;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(ChevronPoints));
+                Settings.NotifyAllProperties();
+                ChevronAngle_textBox.Text = Math.Round(val, 1).ToString();
+            }
+        }
+        public Color ChevronColor { get => Settings.ChevronColor; set { Settings.ChevronColor = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
+        public bool ChevronVisibility { get => Settings.ChevronVisibility; set { Settings.ChevronVisibility = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(ChevronVisibilityString)); Settings.NotifyAllProperties(); } }
+        public string ChevronVisibilityString { get => Settings.ChevronVisibilityString; }
+        public string ChevronPoints { get => Settings.ChevronPoints; }
 
         // Cross
-        public double CrossThickness { get => Settings.CrossThickness; set { Settings.CrossThickness = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
-        public double CrossLength { get => Settings.CrossLength; set { Settings.CrossLength = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
-        public double CrossOffset { get => Settings.CrossOffset; set { Settings.CrossOffset = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(CrossOffsetString)); Settings.NotifyAllProperties(); } }
+        public double CrossThickness
+        {
+            get => Settings.CrossThickness;
+            set
+            {
+                double val = value;
+                if (val < 1) val = 1;
+                if (val > 20) val = 20;
+                Settings.CrossThickness = val;
+                NotifyPropertyChanged();
+                Settings.NotifyAllProperties();
+                CrossThickness_textBox.Text = Math.Round(val, 1).ToString();
+            }
+        }
+        public double CrossLength
+        {
+            get => Settings.CrossLength;
+            set
+            {
+                double val = value;
+                if (val < 1) val = 1;
+                if (val > 50) val = 50;
+                Settings.CrossLength = val;
+                NotifyPropertyChanged();
+                Settings.NotifyAllProperties();
+                CrossLength_textBox.Text = Math.Round(val, 1).ToString();
+            }
+        }
+        public double CrossOffset
+        {
+            get => Settings.CrossOffset;
+            set
+            {
+                double val = value;
+                if (val < 0) val = 0;
+                if (val > 30) val = 30;
+                Settings.CrossOffset = val;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(CrossOffsetString));
+                Settings.NotifyAllProperties();
+                CrossOffset_textBox.Text = Math.Round(val, 1).ToString();
+            }
+        }
         public string CrossOffsetString { get => Settings.CrossOffsetString; }
-        public double CrossRotation { get => Settings.CrossRotation; set { Settings.CrossRotation = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
+        public double CrossRotation
+        {
+            get => Settings.CrossRotation;
+            set
+            {
+                double val = value;
+                if (val < 0) val = 0;
+                if (val > 90) val = 90;
+                Settings.CrossRotation = val;
+                NotifyPropertyChanged();
+                Settings.NotifyAllProperties();
+                CrossRotation_textBox.Text = Math.Round(val, 1).ToString();
+            }
+        }
         public Color CrossColor { get => Settings.CrossColor; set { Settings.CrossColor = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
         public bool CrossVisibility { get => Settings.CrossVisibility; set { Settings.CrossVisibility = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(CrossVisibilityString)); Settings.NotifyAllProperties(); } }
         public string CrossVisibilityString { get => Settings.CrossVisibilityString; }
@@ -178,25 +314,37 @@ namespace OnScreenReticleXboxGameBar
             if (SettingsList.Count == 1) return;
 
             int index = SettingsListIndex;
-            if (SettingsListIndex > 0) SettingsListIndex--;
-            SettingsList.RemoveAt(index);
+
+            Settings temp = ((sender as Button).Parent as Grid).DataContext as Settings;
+            SettingsList.Remove(temp);
+
+
+
+
+            if (SettingsList.Count < index)
+                SettingsListIndex = index;
+
+            //if (SettingsListIndex > 0) SettingsListIndex--;
+            //SettingsList.RemoveAt(index);
+
+                int a = ReticleList_dataGrid.SelectedIndex;
         }
 
         private void SetDefault_button_Click(object sender, RoutedEventArgs e)
         {
-            Top = 300;
-            Left = 125;
+            Top = 0;
+            Left = 0;
             ThemeColor = new Color() { A = 0xB2, R = 0, G = 0xFF, B = 0xBF };
 
             DotDiameter = 6;
             DotColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
             DotVisibility = true;
 
-            AngleThickness = 3;
-            AngleLength = 13;
-            AngleAngle = 50;//35~70
-            AngleColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
-            AngleVisibility = true;
+            ChevronThickness = 3;
+            ChevronLength = 13;
+            ChevronAngle = 50;//35~70
+            ChevronColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
+            ChevronVisibility = true;
 
             CrossThickness = 3.5;
             CrossLength = 10;
@@ -211,9 +359,9 @@ namespace OnScreenReticleXboxGameBar
             DotColorButton.Flyout.Hide();
         }
 
-        private void AngleColorPickerClose_Click(object sender, RoutedEventArgs e)
+        private void ChevronColorPickerClose_Click(object sender, RoutedEventArgs e)
         {
-            AngleColorButton.Flyout.Hide();
+            ChevronColorButton.Flyout.Hide();
         }
 
         private void CrossColorPickerClose_Click(object sender, RoutedEventArgs e)
@@ -239,10 +387,10 @@ namespace OnScreenReticleXboxGameBar
                 NotifyPropertyChanged(nameof(DotVisibility));
                 NotifyPropertyChanged(nameof(DotVisibilityString));
 
-                NotifyPropertyChanged(nameof(AngleColor));
-                NotifyPropertyChanged(nameof(AngleVisibility));
-                NotifyPropertyChanged(nameof(AngleVisibilityString));
-                NotifyPropertyChanged(nameof(AnglePoints));
+                NotifyPropertyChanged(nameof(ChevronColor));
+                NotifyPropertyChanged(nameof(ChevronVisibility));
+                NotifyPropertyChanged(nameof(ChevronVisibilityString));
+                NotifyPropertyChanged(nameof(ChevronPoints));
 
                 NotifyPropertyChanged(nameof(CrossColor));
                 NotifyPropertyChanged(nameof(CrossThickness));

@@ -28,7 +28,6 @@ namespace OnScreenReticleXboxGameBar
         private XboxGameBarWidget reticleSettings;
 
         public Reticle reticleUWP;
-        public ReticleSettings reticleSettingsUWP;
 
         private SettingsList settingsList;
         private Settings settings;
@@ -82,13 +81,6 @@ namespace OnScreenReticleXboxGameBar
 
                             Window.Current.Closed += Reticle_Closed;
                             break;
-                        case "ReticleSettings":
-                            reticleSettings = new XboxGameBarWidget(widgetArgs, Window.Current.CoreWindow, rootFrame);
-                            rootFrame.Navigate(typeof(ReticleSettings), reticleSettings);
-                            reticleSettingsUWP = rootFrame.Content as ReticleSettings;
-
-                            Window.Current.Closed += ReticleSettings_Closed;
-                            break;
                         default:
                             break;
                     }
@@ -109,7 +101,6 @@ namespace OnScreenReticleXboxGameBar
             reticle = null;
             Window.Current.Closed -= Reticle_Closed;
         }
-
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
