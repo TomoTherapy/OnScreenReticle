@@ -38,26 +38,22 @@ namespace OnScreenReticleXboxGameBar
 
         private XboxGameBarWidget widget;
         private Settings settings;
-        private string newSettingName;
 
         public ObservableCollection<Settings> SettingsList { get => ((App)Application.Current).SettingsList.List; set => ((App)Application.Current).SettingsList.List = value; }
         public int SettingsListIndex
         {
             get
             {
-                Settings = SettingsList[((App)Application.Current).SettingsList.ChosenOne];
                 return ((App)Application.Current).SettingsList.ChosenOne;
             }
             set
             {
                 ((App)Application.Current).SettingsList.ChosenOne = value;
-                Settings = SettingsList[((App)Application.Current).SettingsList.ChosenOne];
                 NotifyAllProperties();
             }
         }
-        public Settings Settings { get => settings; set { settings = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
-        public string NewSettingName { get => newSettingName; set { newSettingName = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
 
+        public Settings Settings { get => settings; set { settings = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
         public Color ThemeColor { get => Settings.ThemeColor; set { Settings.ThemeColor = value; NotifyPropertyChanged(); Settings.NotifyAllProperties(); } }
 
         // Location
@@ -313,21 +309,8 @@ namespace OnScreenReticleXboxGameBar
         {
             if (SettingsList.Count == 1) return;
 
-            int index = SettingsListIndex;
-
             Settings temp = ((sender as Button).Parent as Grid).DataContext as Settings;
             SettingsList.Remove(temp);
-
-
-
-
-            if (SettingsList.Count < index)
-                SettingsListIndex = index;
-
-            //if (SettingsListIndex > 0) SettingsListIndex--;
-            //SettingsList.RemoveAt(index);
-
-                int a = ReticleList_dataGrid.SelectedIndex;
         }
 
         private void SetDefault_button_Click(object sender, RoutedEventArgs e)
@@ -400,11 +383,6 @@ namespace OnScreenReticleXboxGameBar
                 NotifyPropertyChanged(nameof(CrossVisibility));
                 NotifyPropertyChanged(nameof(CrossVisibilityString));
             });
-        }
-
-        private void ReticleList_dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
         }
     }
 }
