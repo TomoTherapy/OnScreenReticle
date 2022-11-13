@@ -365,21 +365,25 @@ namespace OnScreenReticleXboxGameBar
                 NotifyPropertyChanged(nameof(Left));
                 NotifyPropertyChanged(nameof(MarginString));
 
-                NotifyPropertyChanged(nameof(DotColor));
                 NotifyPropertyChanged(nameof(DotDiameter));
+                NotifyPropertyChanged(nameof(DotColor));
                 NotifyPropertyChanged(nameof(DotVisibility));
                 NotifyPropertyChanged(nameof(DotVisibilityString));
 
+                NotifyPropertyChanged(nameof(ChevronThickness));
+                NotifyPropertyChanged(nameof(ChevronLength));
+                NotifyPropertyChanged(nameof(ChevronAngle));
+                NotifyPropertyChanged(nameof(ChevronPoints));
                 NotifyPropertyChanged(nameof(ChevronColor));
                 NotifyPropertyChanged(nameof(ChevronVisibility));
                 NotifyPropertyChanged(nameof(ChevronVisibilityString));
-                NotifyPropertyChanged(nameof(ChevronPoints));
 
-                NotifyPropertyChanged(nameof(CrossColor));
                 NotifyPropertyChanged(nameof(CrossThickness));
                 NotifyPropertyChanged(nameof(CrossLength));
+                NotifyPropertyChanged(nameof(CrossOffset));
                 NotifyPropertyChanged(nameof(CrossOffsetString));
                 NotifyPropertyChanged(nameof(CrossRotation));
+                NotifyPropertyChanged(nameof(CrossColor));
                 NotifyPropertyChanged(nameof(CrossVisibility));
                 NotifyPropertyChanged(nameof(CrossVisibilityString));
             });
