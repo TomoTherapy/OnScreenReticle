@@ -157,6 +157,7 @@ namespace OnScreenReticleXboxGameBar
             NotifyPropertyChanged(nameof(DotColor));
             NotifyPropertyChanged(nameof(DotVisibilityString));
 
+            NotifyPropertyChanged(nameof(ChevronAngle));
             NotifyPropertyChanged(nameof(ChevronPoints));
             NotifyPropertyChanged(nameof(ChevronColor));
             NotifyPropertyChanged(nameof(ChevronVisibilityString));
