@@ -141,7 +141,7 @@ namespace OnScreenReticleXboxGameBar
             CrossLength = 10;
             CrossOffset = 10;
             CrossRotation = 0;
-            CrossColor = new Color() { A = 255, R = 0xFA, G = 0xA, B = 0xA };
+            CrossColor = new Color() { A = 0xFF, R = 0xFA, G = 0xA, B = 0xA };
             CrossVisibility = true;
         }
 
@@ -155,24 +155,17 @@ namespace OnScreenReticleXboxGameBar
         {
             NotifyPropertyChanged(nameof(DotDiameter));
             NotifyPropertyChanged(nameof(DotColor));
-            NotifyPropertyChanged(nameof(DotVisibility));
             NotifyPropertyChanged(nameof(DotVisibilityString));
 
-            NotifyPropertyChanged(nameof(ChevronThickness));
-            NotifyPropertyChanged(nameof(ChevronLength));
-            NotifyPropertyChanged(nameof(ChevronAngle));
             NotifyPropertyChanged(nameof(ChevronPoints));
             NotifyPropertyChanged(nameof(ChevronColor));
-            NotifyPropertyChanged(nameof(ChevronVisibility));
             NotifyPropertyChanged(nameof(ChevronVisibilityString));
 
             NotifyPropertyChanged(nameof(CrossThickness));
             NotifyPropertyChanged(nameof(CrossLength));
-            NotifyPropertyChanged(nameof(CrossOffset));
             NotifyPropertyChanged(nameof(CrossOffsetString));
             NotifyPropertyChanged(nameof(CrossRotation));
             NotifyPropertyChanged(nameof(CrossColor));
-            NotifyPropertyChanged(nameof(CrossVisibility));
             NotifyPropertyChanged(nameof(CrossVisibilityString));
         }
     }

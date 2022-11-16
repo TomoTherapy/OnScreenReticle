@@ -320,20 +320,20 @@ namespace OnScreenReticleXboxGameBar
             ThemeColor = new Color() { A = 0xB2, R = 0, G = 0xFF, B = 0xBF };
 
             DotDiameter = 6;
-            DotColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
+            DotColor = new Color() { A = 0xFF, R = 0xFA, G = 0xA, B = 0xA };
             DotVisibility = true;
 
             ChevronThickness = 3;
             ChevronLength = 13;
             ChevronAngle = 50;//35~70
-            ChevronColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
+            ChevronColor = new Color() { A = 0xFF, R = 0xFA, G = 0xA, B = 0xA };
             ChevronVisibility = true;
 
             CrossThickness = 3.5;
             CrossLength = 10;
             CrossOffset = 10;
             CrossRotation = 0;
-            CrossColor = new Color() { A = 255, R = 250, G = 10, B = 10 };
+            CrossColor = new Color() { A = 0xFF, R = 0xFA, G = 0xA, B = 0xA };
             CrossVisibility = true;
         }
 
