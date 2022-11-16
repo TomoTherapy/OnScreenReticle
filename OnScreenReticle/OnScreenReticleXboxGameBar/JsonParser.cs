@@ -19,11 +19,13 @@ namespace OnScreenReticleXboxGameBar
     {
         private SettingsList settingsList;
         private StorageFolder storageFolder;
+        private object obj;
 
         public SettingsList SettingsList { get => settingsList; set => settingsList = value; }
 
         public JsonParser()
         {
+            obj = new object();
             storageFolder = ApplicationData.Current.LocalFolder;
             DeserializeSettings();
 
@@ -39,7 +41,11 @@ namespace OnScreenReticleXboxGameBar
             try
             {
                 StorageFile jsonFile = storageFolder.CreateFileAsync("OnScreenReticle.json", CreationCollisionOption.ReplaceExisting).AsTask().Result;
-                FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList)).AsTask();
+                
+                lock (obj)
+                {
+                    FileIO.WriteTextAsync(jsonFile, JsonConvert.SerializeObject(settingsList)).AsTask();
+                }
             }
             catch (Exception)
             {
@@ -52,7 +58,11 @@ namespace OnScreenReticleXboxGameBar
             if (File.Exists(Path.Combine(storageFolder.Path, "OnScreenReticle.json")))
             {
                 StorageFile jsonFile = storageFolder.GetFileAsync("OnScreenReticle.json").AsTask().Result;
-                string json = FileIO.ReadTextAsync(jsonFile).AsTask().Result;
+                string json = "";
+                lock (obj)
+                {
+                    json = FileIO.ReadTextAsync(jsonFile).AsTask().Result;
+                }
                 settingsList = JsonConvert.DeserializeObject<SettingsList>(json);
             }
 
