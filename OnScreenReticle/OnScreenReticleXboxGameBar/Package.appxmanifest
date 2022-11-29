@@ -9,7 +9,7 @@
 
   <Identity
     Name="28e8ff2e-e65e-435f-bed5-8130173825ae"
-    Publisher="CN=jkhong"
+    Publisher="CN=TomoTherapy"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="28e8ff2e-e65e-435f-bed5-8130173825ae" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
