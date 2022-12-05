@@ -983,7 +983,11 @@
                 </Grid>
             </Grid>
         </Grid>
-        <StackPanel HorizontalAlignment="Center" Height="204" Margin="0,24,0,0" VerticalAlignment="Center" Width="270" Visibility="{Binding ClickThroughEnabled}" Background="#992F2F2F">
+        <StackPanel HorizontalAlignment="Center" Height="164" Margin="0,151,0,0" VerticalAlignment="Top" Width="270" Visibility="{Binding Pinned}" Background="#992F2F2F">
+            <TextBlock Text="Click &quot;Pin&quot; icon on the top right corner" HorizontalAlignment="Center" Margin="0,9,0,15"/>
+            <Image Source="/Assets/click_to_pin.png" Stretch="None"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Height="204" Margin="0,150,0,0" VerticalAlignment="Center" Width="270" Visibility="{Binding ClickThroughEnabled}" Background="#992F2F2F">
             <TextBlock Text="Click &quot;Enable click-through&quot; in the top bar" HorizontalAlignment="Center" Margin="0,9,0,15"/>
             <Image Source="/Assets/enable_click_through.png" Stretch="None"/>
         </StackPanel>
