@@ -250,9 +250,6 @@
       <HintPath>C:\Users\jkhong\.nuget\packages\microsoft.ui.xaml\2.7.0\lib\uap10.0\Microsoft.UI.Xaml.winmd</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="OnScreenReticleXboxGameBar_TemporaryKey.pfx" />
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
